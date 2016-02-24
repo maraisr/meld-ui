@@ -1,0 +1,24 @@
+{
+	"name": "meld-ui",
+	"description": "The real world OIM library for JavaScript!",
+	"main": "dist/solution.js",
+	"authors": [
+		"Marais Rossouw"
+	],
+	"license": "GPL-2.0",
+	"keywords": [
+		"js",
+		"oim"
+	],
+	"homepage": "https://github.com/maraisr/meld-ui",
+	"moduleType": [
+		"amd",
+		"globals",
+		"node"
+	],
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components"
+	]
+}
