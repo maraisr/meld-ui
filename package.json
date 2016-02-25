@@ -5,7 +5,7 @@
     "main": "dist/solution.js",
     "scripts": {
         "build": "tsc && rollup -c=rollup.config.js && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
-        "test": "jasmine-node --test-dir spec/"
+        "test": "karma start karma.conf.js --log-level debug --single-run"
     },
     "repository": {
         "type": "git",
@@ -24,7 +24,9 @@
     "devDependencies": {
         "babel-preset-es2015-rollup": "^1.1.1",
         "babel-preset-stage-3": "^6.5.0",
-        "jasmine": "^2.4.1",
+        "karma-cli": "~0.0.4",
+        "karma-jasmine": "^0.3.7",
+        "karma-phantomjs-launcher": "~0.1.4",
         "rollup-plugin-babel": "^2.4.0",
         "uglifyjs": "^2.4.10"
     }
