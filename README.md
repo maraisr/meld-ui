@@ -10,14 +10,14 @@
 I aim to create a lightweight framework per say that is unobtrusive, or agnostic of its surroundings. So in essence being able to communicate with Angular, React, Web Components or the old school Vanilla JS. Giving you the wonders of a dynamic OIM (Object Interface Mapper) filling the gap between an ORM and the UI.
 
 ## Installation
-Install tsHttp using [npm](https://docs.npmjs.com/):
+Install Meld UI using [npm](https://docs.npmjs.com/):
 ```sh
 npm i meld-ui --save
 ```
 
-Install tsHttp using [bower](http://bower.io/#getting-started):
+Install Meld UI using [bower](http://bower.io/#getting-started):
 ```sh
-bower i tsmeld-uihttp --save
+bower i meld-ui --save
 ```
 
 ## Building
