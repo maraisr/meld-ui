@@ -31,6 +31,5 @@ To build:
 ## Testing
 
 To test:
-- `npm i -g karma jasmine`
 - `npm i`
 - `npm test`
