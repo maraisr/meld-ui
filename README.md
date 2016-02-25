@@ -27,6 +27,13 @@ To build:
 - `npm i`
 - `npm run build`
 
+## Testing
+
+To test:
+- `npm i -g karma jasmine`
+- `npm i`
+- `npm test`
+
 [npm-image]: https://img.shields.io/npm/v/meld-ui.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/meld-ui
 [bower-image]: https://img.shields.io/bower/v/meld-ui.svg?style=flat-square
