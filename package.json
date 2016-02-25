@@ -1,31 +1,31 @@
 {
-  "name": "meld-ui",
-  "version": "0.0.2",
-  "description": "The real world OIM library for JavaScript!",
-  "main": "dist/solution.js",
-  "scripts": {
-    "build": "tsc && rollup -c=rollup.config.js && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maraisr/meld-ui.git"
-  },
-  "keywords": [
-    "js",
-    "oim"
-  ],
-  "author": "Marais Rossouw",
-  "license": "GPL-2.0",
-  "bugs": {
-    "url": "https://github.com/maraisr/meld-ui/issues"
-  },
-  "homepage": "https://github.com/maraisr/meld-ui#readme",
-  "devDependencies": {
-    "babel-preset-es2015-rollup": "^1.1.1",
-    "babel-preset-stage-3": "^6.5.0",
-    "jasmine": "^2.4.1",
-    "rollup-plugin-babel": "^2.4.0",
-    "uglifyjs": "^2.4.10"
-  }
+    "name": "meld-ui",
+    "version": "0.0.2",
+    "description": "The real world OIM library for JavaScript!",
+    "main": "dist/solution.js",
+    "scripts": {
+        "build": "tsc && rollup -c=rollup.config.js && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
+        "test": "jasmine-node --test-dir spec/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/maraisr/meld-ui.git"
+    },
+    "keywords": [
+        "js",
+        "oim"
+    ],
+    "author": "Marais Rossouw",
+    "license": "GPL-2.0",
+    "bugs": {
+        "url": "https://github.com/maraisr/meld-ui/issues"
+    },
+    "homepage": "https://github.com/maraisr/meld-ui#readme",
+    "devDependencies": {
+        "babel-preset-es2015-rollup": "^1.1.1",
+        "babel-preset-stage-3": "^6.5.0",
+        "jasmine": "^2.4.1",
+        "rollup-plugin-babel": "^2.4.0",
+        "uglifyjs": "^2.4.10"
+    }
 }
