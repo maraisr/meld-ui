@@ -22,14 +22,10 @@ bower i meld-ui --save
 ```
 
 ## Building
-
-To build:
 - `npm i -g tsc`
 - `npm i`
 - `npm run build`
 
 ## Testing
-
-To test:
 - `npm i`
 - `npm test`
