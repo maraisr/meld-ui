@@ -1,15 +1,6 @@
-// Karma configuration
-// Generated on Thu Feb 25 2016 17:37:25 GMT+1100 (AEDT)
-
 module.exports = function (config) {
     config.set({
-
-        // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
-
-
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['jasmine'],
 
 
@@ -51,17 +42,17 @@ module.exports = function (config) {
 
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
 
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome'], //PhantomJS
+        browsers: ['PhantomJS'],
 
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous
