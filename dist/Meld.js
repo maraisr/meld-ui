@@ -16,7 +16,7 @@
 
     exports.Meld;
     (function (Meld) {
-        var Ui = function Ui() {
+        var Ui = function Ui(elm) {
             babelHelpers.classCallCheck(this, Ui);
         };
 
