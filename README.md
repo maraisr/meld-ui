@@ -1,9 +1,10 @@
 [WIP] MELD UI
 =============
 
-[![NPM version][npm-image]][npm-url]
-[![Bower version][bower-image]][bower-url]
-[![License][license-image]][license-url]
+[![NPM version](https://img.shields.io/npm/v/meld-ui.svg?style=flat-square)](https://www.npmjs.com/package/meld-ui)
+[![Bower version](https://img.shields.io/bower/v/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui)
+[![Travis](https://img.shields.io/travis/maraisr/meld-ui.svg?style=flat-square)](https://travis-ci.org/maraisr/meld-ui)
+[![License](https://img.shields.io/npm/l/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui/blob/master/LICENSE.md)
 
 > The beginings of something great!
 
@@ -33,10 +34,3 @@ To test:
 - `npm i -g karma jasmine`
 - `npm i`
 - `npm test`
-
-[npm-image]: https://img.shields.io/npm/v/meld-ui.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/meld-ui
-[bower-image]: https://img.shields.io/bower/v/meld-ui.svg?style=flat-square
-[bower-url]: https://github.com/maraisr/meld-ui
-[license-image]: https://img.shields.io/npm/l/meld-ui.svg?style=flat-square
-[license-url]: https://github.com/maraisr/meld-ui/blob/master/LICENSE.md
