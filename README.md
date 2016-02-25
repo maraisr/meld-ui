@@ -1,5 +1,5 @@
-MELD UI
-=======
+[WIP] MELD UI
+=============
 
 [![NPM version][npm-image]][npm-url]
 [![Bower version][bower-image]][bower-url]
@@ -9,7 +9,23 @@ MELD UI
 
 I aim to create a lightweight framework per say that is unobtrusive, or agnostic of its surroundings. So in essence being able to communicate with Angular, React, Web Components or the old school Vanilla JS. Giving you the wonders of a dynamic OIM (Object Interface Mapper) filling the gap between an ORM and the UI.
 
-This is just starting out, but believe it to be great!
+## Installation
+Install tsHttp using [npm](https://docs.npmjs.com/):
+```sh
+npm i meld-ui --save
+```
+
+Install tsHttp using [bower](http://bower.io/#getting-started):
+```sh
+bower i tsmeld-uihttp --save
+```
+
+## Building
+
+To build:
+- `npm i -g tsc`
+- `npm i`
+- `npm run build`
 
 [npm-image]: https://img.shields.io/npm/v/meld-ui.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/meld-ui
