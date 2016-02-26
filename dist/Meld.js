@@ -12,17 +12,49 @@
       }
     };
 
+    babelHelpers.createClass = function () {
+      function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+          var descriptor = props[i];
+          descriptor.enumerable = descriptor.enumerable || false;
+          descriptor.configurable = true;
+          if ("value" in descriptor) descriptor.writable = true;
+          Object.defineProperty(target, descriptor.key, descriptor);
+        }
+      }
+
+      return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) defineProperties(Constructor, staticProps);
+        return Constructor;
+      };
+    }();
+
     babelHelpers;
 
     exports.Meld;
     (function (Meld) {
-        var Ui = function Ui(elm, config) {
-            babelHelpers.classCallCheck(this, Ui);
+        var Ui = function () {
+            function Ui(elm) {
+                babelHelpers.classCallCheck(this, Ui);
 
-            this.elm = elm;
-            this.config = config;
-            this.elm.innerHTML = config.selectTemplate;
-        };
+                this.elm = elm;
+            }
+
+            babelHelpers.createClass(Ui, [{
+                key: "init",
+                value: function init(config) {
+                    this.config = config;
+                    return true;
+                }
+            }, {
+                key: "render",
+                value: function render(binds) {
+                    return true;
+                }
+            }]);
+            return Ui;
+        }();
 
         Meld.Ui = Ui;
     })(exports.Meld || (exports.Meld = {}));
