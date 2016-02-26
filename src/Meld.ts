@@ -1,4 +1,5 @@
 import {Elements as e} from 'Elements';
+import {Render as r} from 'Render';
 
 export module Meld {
 	interface UiTemplates {
@@ -9,14 +10,11 @@ export module Meld {
 		templates: UiTemplates;
 	}
 
-	interface UiBind {
-		type: string;
-		bind: string;
-	}
-
     export class Ui {
 		public elm: HTMLElement;
 		private config: UiConfig;
+
+		public fields: Array<r.Text> = new Array();
 
         constructor(elm: HTMLElement) {
 			if (!elm) {
@@ -32,7 +30,21 @@ export module Meld {
 			return true;
 		}
 
-		public render(binds: Array<UiBind>): Boolean {
+		public render(binds: any): Boolean {
+
+			Object.keys(binds).forEach((key) => {
+				let val = binds[key];
+
+				if (typeof val == 'string') {
+					this.fields.push(new r.Text(key, val));
+				}
+
+			});
+
+			this.fields.forEach((v) => {
+				this.elm.appendChild(v.deligate());
+			});
+
 			return true;
 		}
     }

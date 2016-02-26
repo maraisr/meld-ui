@@ -5,10 +5,10 @@
 	"main": "dist/solution.js",
 	"scripts": {
 		"clean": "rm -rf dist/* tmp/*",
-		"test": "karma start karma.conf.js --single-run",
+		"test": "karma start --single-run",
 		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
 		"dev": "tsc && rollup -c=rollup.config.js",
-		"watch:test": "watch 'npm run test' dist spec",
+		"watch:test": "karma start --browsers PhantomJS --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
 	},
 	"repository": {
@@ -33,6 +33,7 @@
 		"karma-cli": "~0.1.2",
 		"karma-jasmine": "^0.3.7",
 		"karma-phantomjs-launcher": "~1.0.0",
+		"karma-chrome-launcher": "^0.2.2",
 		"phantomjs-prebuilt": "^2.1.4",
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
