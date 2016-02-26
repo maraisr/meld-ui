@@ -4,11 +4,14 @@
 	"description": "The real world OIM library for JavaScript!",
 	"main": "dist/solution.js",
 	"scripts": {
+		"clean": "rm -rf dist/* tmp/*",
 		"test": "karma start karma.conf.js --single-run",
 		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
 		"dev": "tsc && rollup -c=rollup.config.js",
-		"watch:test": "watch 'npm run test' dist",
-		"watch:dev": "watch 'npm run dev' src"
+		"watch:test": "watch 'npm run test' dist spec",
+		"watch:dev": "watch 'npm run dev' src",
+		"prepublish": "npm run build && npm test",
+		"prebuild": "npm run clean"
 	},
 	"repository": {
 		"type": "git",
