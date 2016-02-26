@@ -1,7 +1,6 @@
 import {Elements as e} from 'Elements';
 
 export module Meld {
-
 	interface UiTemplates {
 		input:string;
 	}
