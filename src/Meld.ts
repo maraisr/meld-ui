@@ -2,20 +2,35 @@ import {Elements as e} from 'Elements';
 
 export module Meld {
 
+	interface UiTemplates {
+		input:string;
+	}
+
 	interface UiConfig {
-		selectTemplate:string;
+		templates:UiTemplates;
+	}
+
+	interface UiBind {
+		type:string;
+		bind:string;
 	}
 
     export class Ui {
-		private config:UiConfig;
 		public elm:HTMLElement;
+		private config:UiConfig;
 
-        constructor(elm:HTMLElement, config:UiConfig) {
+        constructor(elm:HTMLElement) {
 			this.elm = elm;
+        }
+
+		public init(config:UiConfig):Boolean {
 			this.config = config;
 
-			// TODO: This is only a test - remove later..
-			this.elm.innerHTML = config.selectTemplate;
-        }
+			return true;
+		}
+
+		public render(binds:Array<UiBind>):Boolean {
+			return true;
+		}
     }
 }
