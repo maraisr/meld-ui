@@ -16,8 +16,12 @@
 
     exports.Meld;
     (function (Meld) {
-        var Ui = function Ui(elm) {
+        var Ui = function Ui(elm, config) {
             babelHelpers.classCallCheck(this, Ui);
+
+            this.elm = elm;
+            this.config = config;
+            this.elm.innerHTML = config.selectTemplate;
         };
 
         Meld.Ui = Ui;

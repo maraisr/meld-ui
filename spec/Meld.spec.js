@@ -1,14 +1,17 @@
 var Meld = Meld.Meld;
 
 describe('Testing the creation of a meld view', function () {
-    it('Creates a new Meld instance', function () {
-        var m = new Meld.Ui();
 
-        expect(m instanceof Meld.Ui).toBe(true);
-    });
+	var context = document.createElement('div');
+		context.setAttribute('id', 'app');
 
 	it('Creates a DOM node', function() {
+		document.body.appendChild(context);
 
-		expect(true).toBe(true);
+		var m = new Meld.Ui(context, {
+			selectTemplate: '<select></select>'
+		});
+
+		expect(context.getElementsByTagName('select').length > 0).toBe(true);
 	});
 });

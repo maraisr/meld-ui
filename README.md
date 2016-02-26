@@ -24,8 +24,10 @@ bower i meld-ui --save
 ## Building
 - `npm i -g tsc`
 - `npm i`
-- `npm run build`
+- `npm run watch:dev`
 
 ## Testing
 - `npm i`
 - `npm test`
+
+For a release `npm run build`.
