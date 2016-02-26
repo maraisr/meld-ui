@@ -3,16 +3,14 @@ var Meld = Meld.Meld;
 describe('Creation', function () {
 
 	var context = document.createElement('div');
-		context.setAttribute('id', 'app');
+	context.setAttribute('id', 'app');
 
-	it('inits', function() {
-		document.body.appendChild(context);
+	it('warn\'s when no HTMLElement is given', function () {
+		console.warn = jasmine.createSpy('warn');
 
-		var m = new Meld.Ui(context);
+		new Meld.Ui();
 
-		m.render();
-
-		expect(true).toBe(true);
+		expect(console.warn).toHaveBeenCalled();
 	});
 
 });
