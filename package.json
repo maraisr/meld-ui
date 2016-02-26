@@ -9,9 +9,7 @@
 		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
 		"dev": "tsc && rollup -c=rollup.config.js",
 		"watch:test": "watch 'npm run test' dist spec",
-		"watch:dev": "watch 'npm run dev' src",
-		"prepublish": "npm run build && npm test",
-		"prebuild": "npm run clean"
+		"watch:dev": "watch 'npm run dev' src"
 	},
 	"repository": {
 		"type": "git",
