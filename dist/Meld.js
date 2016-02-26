@@ -63,6 +63,9 @@
 
             this.name = name;
             this.value = value;
+            this.hash = Math.random().toString(36).substr(2, 7);
+            this.elm = document.createElement('div');
+            this.elm.className = 'meld__bind';
         };
 
         var Text = function (_Bind) {
@@ -77,10 +80,11 @@
                 key: 'deligate',
                 value: function deligate() {
                     var elm = document.createElement('input');
+                    this.elm.appendChild(elm);
                     elm.setAttribute('type', 'text');
-                    elm.setAttribute('name', this.name);
+                    elm.setAttribute('name', this.hash);
                     elm.setAttribute('value', this.value);
-                    return elm;
+                    return this.elm;
                 }
             }]);
             return Text;

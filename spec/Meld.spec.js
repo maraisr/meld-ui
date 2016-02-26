@@ -12,16 +12,4 @@ describe('Creation', function () {
 
         expect(console.warn).toHaveBeenCalled();
     });
-
-    it('created the correct two dom nodes!', function () {
-        var m = new Meld.Ui(context);
-
-        m.render({
-			firstname: 'Marais',
-			lastname: 'Rossouw'
-		});
-
-		expect(context.innerHTML).toEqual('<input type="text" name="firstname" value="Marais"><input type="text" name="lastname" value="Rossouw">');
-    });
-
 });
