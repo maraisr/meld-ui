@@ -38,17 +38,20 @@
             function Ui(elm) {
                 babelHelpers.classCallCheck(this, Ui);
 
+                if (!elm) {
+                    console.warn('Meld: No HTMLElement provided.');
+                }
                 this.elm = elm;
             }
 
             babelHelpers.createClass(Ui, [{
-                key: "init",
+                key: 'init',
                 value: function init(config) {
                     this.config = config;
                     return true;
                 }
             }, {
-                key: "render",
+                key: 'render',
                 value: function render(binds) {
                     return true;
                 }
