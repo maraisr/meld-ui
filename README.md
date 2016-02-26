@@ -1,5 +1,5 @@
-[WIP] MELD UI
-=============
+MELD UI
+=======
 
 [![NPM version](https://img.shields.io/npm/v/meld-ui.svg?style=flat-square)](https://www.npmjs.com/package/meld-ui)
 [![Bower version](https://img.shields.io/bower/v/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui)
