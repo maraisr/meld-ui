@@ -1,4 +1,3 @@
-import {Elements as e} from 'Elements';
 import {Render as r} from 'Render';
 
 export module Meld {
