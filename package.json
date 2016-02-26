@@ -4,9 +4,11 @@
 	"description": "The real world OIM library for JavaScript!",
 	"main": "dist/solution.js",
 	"scripts": {
-		"dev": "tsc && rollup -c=rollup.config.js",
+		"test": "karma start karma.conf.js --single-run",
 		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
-		"test": "karma start karma.conf.js --log-level debug --single-run"
+		"dev": "tsc && rollup -c=rollup.config.js",
+		"watch:test": "watch 'npm run test' dist",
+		"watch:dev": "watch 'npm run dev' src"
 	},
 	"repository": {
 		"type": "git",
@@ -33,6 +35,7 @@
 		"phantomjs-prebuilt": "^2.1.4",
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
-		"uglifyjs": "^2.4.10"
+		"uglifyjs": "^2.4.10",
+		"watch": "^0.17.1"
 	}
 }
