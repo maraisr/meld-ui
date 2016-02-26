@@ -33,7 +33,6 @@
 		"karma-cli": "~0.1.2",
 		"karma-jasmine": "^0.3.7",
 		"karma-phantomjs-launcher": "~1.0.0",
-		"karma-chrome-launcher": "^0.2.2",
 		"phantomjs-prebuilt": "^2.1.4",
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
