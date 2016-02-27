@@ -8,7 +8,7 @@
 		"test": "karma start --single-run",
 		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
 		"dev": "tsc && rollup -c=rollup.config.js",
-		"watch:test": "karma start --browsers PhantomJS --auto-watch",
+		"watch:test": "karma start --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
 	},
 	"repository": {
@@ -26,6 +26,7 @@
 	},
 	"homepage": "https://github.com/maraisr/meld-ui#readme",
 	"devDependencies": {
+		"babel-polyfill": "^6.5.0",
 		"babel-preset-es2015-rollup": "^1.1.1",
 		"babel-preset-stage-2": "^6.5.0",
 		"jasmine-core": "^2.4.1",
