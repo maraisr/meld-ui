@@ -81,6 +81,7 @@
                 value: function deligate() {
                     var elm = document.createElement('input');
                     this.elm.appendChild(elm);
+                    this.elm.className += ' meld__bind--text';
                     elm.setAttribute('type', 'text');
                     elm.setAttribute('name', this.hash);
                     elm.setAttribute('value', this.value);
