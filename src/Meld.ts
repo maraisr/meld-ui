@@ -1,48 +1,51 @@
 import {Render as r} from 'Render';
+import {Common} from 'helpers/Common';
 
 export module Meld {
-	interface UiTemplates {
-		input: string;
-	}
-
-	interface UiConfig {
-		templates: UiTemplates;
-	}
-
     export class Ui {
 		public elm: HTMLElement;
-		private config: UiConfig;
 
-		public fields: Array<r.Text> = new Array();
-
-        constructor(elm: HTMLElement) {
+        constructor(elm: HTMLElement, binds?: any) {
 			if (!elm) {
 				console.warn('Meld: No HTMLElement provided.');
 			}
 
 			this.elm = elm;
+
+			if (binds != void 0) {
+				this.render(binds);
+			}
         }
 
-		public init(config: UiConfig): Boolean {
-			this.config = config;
-
-			return true;
-		}
-
 		public render(binds: any): Boolean {
+
+			var _r = new r.Rndr(Common.hasher());
 
 			Object.keys(binds).forEach((key) => {
 				let val = binds[key];
 
-				if (typeof val == 'string') {
-					this.fields.push(new r.Text(key, val));
+				// TODO: This whole section could be done in a recursive manner
+				switch (typeof val) {
+					case 'object':
+
+						// TODO: Check to see if callable, and if so call
+						let grp = _r.group(key);
+
+						Object.keys(val).forEach((grpKey) => {
+							let grpVal = val[grpKey];
+
+							grp.add(new r.Text(grpKey, grpVal));
+						});
+
+						break;
+					case 'string':
+						_r.add(new r.Text(key, val));
+						break;
 				}
 
 			});
 
-			this.fields.forEach((v) => {
-				this.elm.appendChild(v.deligate());
-			});
+			this.elm.appendChild(_r.render());
 
 			return true;
 		}

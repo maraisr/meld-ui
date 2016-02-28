@@ -5,6 +5,11 @@
 }(this, function (exports) { 'use strict';
 
     var babelHelpers = {};
+    babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+    };
 
     babelHelpers.classCallCheck = function (instance, Constructor) {
       if (!(instance instanceof Constructor)) {
@@ -56,16 +61,100 @@
 
     babelHelpers;
 
+    var Common = function () {
+        function Common() {
+            babelHelpers.classCallCheck(this, Common);
+        }
+
+        babelHelpers.createClass(Common, null, [{
+            key: "hasher",
+            value: function hasher() {
+                var len = arguments.length <= 0 || arguments[0] === undefined ? 7 : arguments[0];
+
+                return Math.random().toString(36).substr(2, len);
+            }
+        }]);
+        return Common;
+    }();
+
     var Render;
     (function (Render) {
+        var Rndr = function () {
+            function Rndr(name) {
+                babelHelpers.classCallCheck(this, Rndr);
+
+                this.fields = new Array();
+                this.name = name;
+                this.elm = document.createElement('form');
+                this.elm.setAttribute('id', name);
+            }
+
+            babelHelpers.createClass(Rndr, [{
+                key: 'add',
+                value: function add(what) {
+                    this.fields.push(what);
+                    return true;
+                }
+            }, {
+                key: 'group',
+                value: function group(legend) {
+                    return this.fields[this.fields.push(new Group(legend)) - 1];
+                }
+            }, {
+                key: 'render',
+                value: function render() {
+                    var _this = this;
+
+                    this.fields.forEach(function (v) {
+                        _this.elm.appendChild(v.deligate());
+                    });
+                    return this.elm;
+                }
+            }]);
+            return Rndr;
+        }();
+
+        Render.Rndr = Rndr;
+
+        var Group = function () {
+            function Group(name) {
+                babelHelpers.classCallCheck(this, Group);
+
+                this.fields = new Array();
+                var grp = document.createElement('fieldset'),
+                    lgnd = document.createElement('legend');
+                lgnd.innerText = name;
+                grp.appendChild(lgnd);
+                this.elm = grp;
+            }
+
+            babelHelpers.createClass(Group, [{
+                key: 'add',
+                value: function add(what) {
+                    this.fields.push(what);
+                    return true;
+                }
+            }, {
+                key: 'deligate',
+                value: function deligate() {
+                    var _this2 = this;
+
+                    this.fields.forEach(function (v) {
+                        _this2.elm.appendChild(v.deligate());
+                    });
+                    return this.elm;
+                }
+            }]);
+            return Group;
+        }();
+
         var Bind = function Bind(name, value) {
             babelHelpers.classCallCheck(this, Bind);
 
             this.name = name;
             this.value = value;
-            this.hash = Math.random().toString(36).substr(2, 7);
+            this.hash = Common.hasher();
             this.elm = document.createElement('div');
-            this.elm.className = 'meld__bind';
         };
 
         var Text = function (_Bind) {
@@ -81,7 +170,6 @@
                 value: function deligate() {
                     var elm = document.createElement('input');
                     this.elm.appendChild(elm);
-                    this.elm.className += ' meld__bind--text';
                     elm.setAttribute('type', 'text');
                     elm.setAttribute('name', this.hash);
                     elm.setAttribute('value', this.value);
@@ -97,36 +185,38 @@
     exports.Meld;
     (function (Meld) {
         var Ui = function () {
-            function Ui(elm) {
+            function Ui(elm, binds) {
                 babelHelpers.classCallCheck(this, Ui);
 
-                this.fields = new Array();
                 if (!elm) {
                     console.warn('Meld: No HTMLElement provided.');
                 }
                 this.elm = elm;
+                if (binds != void 0) {
+                    this.render(binds);
+                }
             }
 
             babelHelpers.createClass(Ui, [{
-                key: 'init',
-                value: function init(config) {
-                    this.config = config;
-                    return true;
-                }
-            }, {
                 key: 'render',
                 value: function render(binds) {
-                    var _this = this;
-
+                    var _r = new Render.Rndr(Common.hasher());
                     Object.keys(binds).forEach(function (key) {
                         var val = binds[key];
-                        if (typeof val == 'string') {
-                            _this.fields.push(new Render.Text(key, val));
+                        switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
+                            case 'object':
+                                var grp = _r.group(key);
+                                Object.keys(val).forEach(function (grpKey) {
+                                    var grpVal = val[grpKey];
+                                    grp.add(new Render.Text(grpKey, grpVal));
+                                });
+                                break;
+                            case 'string':
+                                _r.add(new Render.Text(key, val));
+                                break;
                         }
                     });
-                    this.fields.forEach(function (v) {
-                        _this.elm.appendChild(v.deligate());
-                    });
+                    this.elm.appendChild(_r.render());
                     return true;
                 }
             }]);
