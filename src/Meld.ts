@@ -17,7 +17,12 @@ export module Meld {
 			}
         }
 
-		public render(binds: any): Boolean {
+		// TODO: Add a function for config, so that each object key can get a "style, or width properties"
+		// TODO: Cleanup render function, and refactor to deligate
+		// TODO: Move all DOM augments to an engine of somesort, so that we canship to virtual DOM down the tack
+		// TODO: Make this whole bloody thing work! #YOLO
+
+		render(binds: any): Boolean {
 
 			var _r = new r.Rndr(Common.hasher());
 
