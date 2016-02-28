@@ -9,39 +9,43 @@ describe('Creation', function () {
 		context.innerHTML = '';
 	});
 
-	it('warn\'s when no HTMLElement is given', function () {
-		console.warn = jasmine.createSpy('warn');
+	it('throw when no binds', function () {
+		var m = new Meld.Ui();
 
-		new Meld.Ui();
-
-		expect(console.warn).toHaveBeenCalled();
+		expect(function() {
+			m.render()
+		}).toThrow();
 	});
 
 
 	describe('renders', function () {
 
 		it('3 text inputs', function () {
-			new Meld.Ui(context, {
+			var m = new Meld.Ui({
 				'name': 'Leanne Graham',
 				'email': 'Sincere@april.biz',
 				'website': 'hildegard.org'
 			});
+
+			m.render(context);
 
 			expect(context.getElementsByTagName('input').length == 3).toEqual(true);
 		});
 
 		it('is wrapped in a form tag', function () {
-			new Meld.Ui(context, {
+			var m = new Meld.Ui({
 				'name': 'Leanne Graham',
 				'email': 'Sincere@april.biz',
 				'website': 'hildegard.org'
 			});
 
+			m.render(context);
+
 			expect(context.getElementsByTagName('form').length == 1).toEqual(true);
 		});
 
-		it('groups bindinds', function () {
-			new Meld.Ui(context, {
+		it('groups binding\'s', function () {
+			var m = new Meld.Ui({
 				'name': 'Leanne Graham',
 				'email': 'Sincere@april.biz',
 				'website': 'hildegard.org',
@@ -53,8 +57,11 @@ describe('Creation', function () {
 				}
 			});
 
+			m.render(context);
+
 			expect(context.getElementsByTagName('legend')[0].innerText == 'address').toEqual(true);
 		});
+
 	});
 
 });

@@ -6,8 +6,6 @@ export module Render {
 
 		private elm: HTMLElement;
 
-		private fields: Array<any> = new Array();
-
 		constructor(name: string) {
 			this.name = name;
 
@@ -15,18 +13,8 @@ export module Render {
 			this.elm.setAttribute('id', name);
 		}
 
-		add(what: any): Boolean {
-			this.fields.push(what);
-
-			return true;
-		}
-
-		group(legend: string): Group {
-			return this.fields[this.fields.push(new Group(legend)) - 1];
-		}
-
-		render(): HTMLElement {
-			this.fields.forEach((v) => {
+		render(fields:Array<any>): HTMLElement {
+			fields.forEach((v) => {
 				this.elm.appendChild(v.deligate());
 			});
 
@@ -34,7 +22,7 @@ export module Render {
 		}
 	}
 
-	class Group {
+	export class Group {
 		private elm: HTMLElement;
 
 		private fields: Array<any> = new Array();
@@ -50,8 +38,8 @@ export module Render {
 			this.elm = grp;
 		}
 
-		add(what: any): Boolean {
-			this.fields.push(what);
+		set(fields: Array<any>): Boolean {
+			this.fields = fields;
 
 			return true;
 		}

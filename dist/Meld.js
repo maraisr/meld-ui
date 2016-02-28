@@ -83,29 +83,17 @@
             function Rndr(name) {
                 babelHelpers.classCallCheck(this, Rndr);
 
-                this.fields = new Array();
                 this.name = name;
                 this.elm = document.createElement('form');
                 this.elm.setAttribute('id', name);
             }
 
             babelHelpers.createClass(Rndr, [{
-                key: 'add',
-                value: function add(what) {
-                    this.fields.push(what);
-                    return true;
-                }
-            }, {
-                key: 'group',
-                value: function group(legend) {
-                    return this.fields[this.fields.push(new Group(legend)) - 1];
-                }
-            }, {
                 key: 'render',
-                value: function render() {
+                value: function render(fields) {
                     var _this = this;
 
-                    this.fields.forEach(function (v) {
+                    fields.forEach(function (v) {
                         _this.elm.appendChild(v.deligate());
                     });
                     return this.elm;
@@ -129,9 +117,9 @@
             }
 
             babelHelpers.createClass(Group, [{
-                key: 'add',
-                value: function add(what) {
-                    this.fields.push(what);
+                key: 'set',
+                value: function set(fields) {
+                    this.fields = fields;
                     return true;
                 }
             }, {
@@ -147,6 +135,8 @@
             }]);
             return Group;
         }();
+
+        Render.Group = Group;
 
         var Bind = function Bind(name, value) {
             babelHelpers.classCallCheck(this, Bind);
@@ -184,40 +174,54 @@
 
     exports.Meld;
     (function (Meld) {
+        var __CHILDREN = '__children__';
+
         var Ui = function () {
-            function Ui(elm, binds) {
+            function Ui(binds) {
                 babelHelpers.classCallCheck(this, Ui);
 
-                if (!elm) {
-                    console.warn('Meld: No HTMLElement provided.');
-                }
-                this.elm = elm;
+                this.fields = new Array();
+                this.built = new Array();
                 if (binds != void 0) {
-                    this.render(binds);
+                    this.built = this.build(binds);
                 }
+                return this;
             }
 
             babelHelpers.createClass(Ui, [{
-                key: 'render',
-                value: function render(binds) {
-                    var _r = new Render.Rndr(Common.hasher());
+                key: 'build',
+                value: function build(binds) {
+                    var _this = this;
+
+                    var returns = [];
                     Object.keys(binds).forEach(function (key) {
                         var val = binds[key];
                         switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                             case 'object':
-                                var grp = _r.group(key);
-                                Object.keys(val).forEach(function (grpKey) {
-                                    var grpVal = val[grpKey];
-                                    grp.add(new Render.Text(grpKey, grpVal));
-                                });
+                                var grp = new Render.Group(key);
+                                grp.set(_this.build(val));
+                                returns.push(grp);
                                 break;
                             case 'string':
-                                _r.add(new Render.Text(key, val));
+                                returns.push(new Render.Text(key, val));
                                 break;
                         }
                     });
-                    this.elm.appendChild(_r.render());
-                    return true;
+                    return returns;
+                }
+            }, {
+                key: 'render',
+                value: function render(elm) {
+                    if (!elm) {
+                        throw new Error('Meld: No HTMLElement provided.');
+                    }
+                    this.elm = elm;
+                    if (this.built.length < 1) {
+                        throw new Error('Meld: Empty bind values, nothing to render');
+                    }
+                    var _r = new Render.Rndr(Common.hasher());
+                    this.elm.appendChild(_r.render(this.built));
+                    return this.elm;
                 }
             }]);
             return Ui;
