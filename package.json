@@ -1,13 +1,13 @@
 {
 	"name": "meld-ui",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "The real world OIM library for JavaScript!",
 	"main": "dist/Meld.min.js",
 	"scripts": {
 		"clean": "rm -rf dist/* tmp/*",
 		"test": "karma start --single-run",
-		"build": "npm run dev && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
-		"dev": "tsc && rollup -c=rollup.config.js",
+		"build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
+		"dev": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js",
 		"watch:test": "karma start --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
 	},
@@ -38,6 +38,7 @@
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
 		"uglifyjs": "^2.4.10",
-		"watch": "^0.17.1"
+		"watch": "^0.17.1",
+		"cross-env": "^1.0.7"
 	}
 }
