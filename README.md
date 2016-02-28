@@ -22,7 +22,7 @@ Down the line this'll all be configurable, in terms of rendering, display names,
 ```JavaScript
 var context = document.createElement('div');
 
-new Meld.Ui(context, {
+(new Meld.Ui({
 	'name': 'Leanne Graham',
 	'email': 'Sincere@april.biz',
 	'website': 'hildegard.org',
@@ -32,7 +32,8 @@ new Meld.Ui(context, {
 		'city': 'Gwenborough',
 		'zipcode': '92998-3874'
 	}
-});
+})).render(context);
+
 ```
 Will produce:
 ```HTML
