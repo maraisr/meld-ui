@@ -21,7 +21,7 @@ Install Meld UI using [bower](http://bower.io/#getting-started):
 bower i meld-ui --save
 ```
 
-## Basic Usuage
+## Basic Usage
 Down the line this'll all be configurable, in terms of rendering, display names, with labels, with validation and all that jaz.
 
 ```JavaScript
