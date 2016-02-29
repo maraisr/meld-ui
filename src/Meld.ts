@@ -26,9 +26,7 @@ export module Meld {
 			return this;
         }
 
-		// TODO: Add a function for config, so that each object key can get a "style, or width properties"
 		// TODO: Move all DOM augments to an engine of somesort, so that we canship to virtual DOM down the tack
-		// TODO: Make this whole bloody thing work! #YOLO
 
 		private build(binds: any): Array<any> {
 			var returns = [];
@@ -79,18 +77,22 @@ export module Meld {
 			return this.elm;
 		}
 
+		// TODO: Add a function for config, so that each object key can get a "style, or width properties"
 		structure(config: Array<UiStructure>): Ui {
 			this.struct = config;
 			return this;
 		}
 
 		destory(): Boolean {
-
 			if (this.elm.parentNode) {
 				this.elm.parentNode.removeChild(this.elm);
+
+				return true;
+			} else {
+				console.warn('Meld: There was no element to cull.');
 			}
 
-			return true;
+			return false;
 		}
     }
 }

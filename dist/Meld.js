@@ -241,8 +241,11 @@
                 value: function destory() {
                     if (this.elm.parentNode) {
                         this.elm.parentNode.removeChild(this.elm);
+                        return true;
+                    } else {
+                        console.warn('Meld: There was no element to cull.');
                     }
-                    return true;
+                    return false;
                 }
             }]);
             return Ui;
