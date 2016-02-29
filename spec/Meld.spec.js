@@ -33,6 +33,15 @@ describe('Creation', function () {
 		}).to.throw();
 	});
 
+	it('destroy\'s', function () {
+		var m = new Meld.Ui(mockPayload);
+
+		m.render(context);
+
+		m.destory();
+
+		expect(document.getElementById('app')).to.be.null;
+	});
 
 	describe('renders', function () {
 
@@ -62,16 +71,6 @@ describe('Creation', function () {
 			m.render(context);
 
 			expect(context.getElementsByTagName('legend')[0].innerText == 'address').to.be.true;
-		});
-
-		it('destories', function () {
-			var m = new Meld.Ui(mockPayload);
-
-			m.render(context);
-
-			m.destory();
-
-			expect(document.getElementById('app')).to.be.null;
 		});
 
 	});
