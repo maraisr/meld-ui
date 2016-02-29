@@ -1,44 +1,44 @@
 {
-	"name": "meld-ui",
-	"version": "0.0.5",
-	"description": "The real world OIM library for JavaScript!",
-	"main": "dist/Meld.min.js",
-	"scripts": {
-		"clean": "rm -rf dist/* tmp/*",
-		"test": "karma start --single-run",
-		"build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
-		"dev": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js",
-		"watch:test": "karma start --auto-watch",
-		"watch:dev": "watch 'npm run dev' src"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/maraisr/meld-ui.git"
-	},
-	"keywords": [
-		"js",
-		"oim"
-	],
-	"author": "Marais Rossouw",
-	"license": "GPL-2.0",
-	"bugs": {
-		"url": "https://github.com/maraisr/meld-ui/issues"
-	},
-	"homepage": "https://github.com/maraisr/meld-ui#readme",
-	"devDependencies": {
-		"babel-polyfill": "^6.5.0",
-		"babel-preset-es2015-rollup": "^1.1.1",
-		"babel-preset-stage-2": "^6.5.0",
-		"jasmine-core": "^2.4.1",
-		"karma": "^0.13.21",
-		"karma-cli": "~0.1.2",
-		"karma-jasmine": "^0.3.7",
-		"karma-phantomjs-launcher": "~1.0.0",
-		"phantomjs-prebuilt": "^2.1.4",
-		"rollup-plugin-babel": "^2.4.0",
-		"rollup-plugin-includepaths": "^0.1.1",
-		"uglifyjs": "^2.4.10",
-		"watch": "^0.17.1",
-		"cross-env": "^1.0.7"
-	}
+  "name": "meld-ui",
+  "version": "0.0.6",
+  "description": "The real world OIM library for JavaScript!",
+  "main": "dist/Meld.min.js",
+  "scripts": {
+    "clean": "rm -rf dist/* tmp/*",
+    "test": "karma start --single-run",
+    "build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
+    "dev": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js",
+    "watch:test": "karma start --auto-watch",
+    "watch:dev": "watch 'npm run dev' src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maraisr/meld-ui.git"
+  },
+  "keywords": [
+    "js",
+    "oim"
+  ],
+  "author": "Marais Rossouw",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/maraisr/meld-ui/issues"
+  },
+  "homepage": "https://github.com/maraisr/meld-ui#readme",
+  "devDependencies": {
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-stage-2": "^6.5.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.21",
+    "karma-cli": "~0.1.2",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "~1.0.0",
+    "phantomjs-prebuilt": "^2.1.4",
+    "rollup-plugin-babel": "^2.4.0",
+    "rollup-plugin-includepaths": "^0.1.1",
+    "uglifyjs": "^2.4.10",
+    "watch": "^0.17.1",
+    "cross-env": "^1.0.7"
+  }
 }
