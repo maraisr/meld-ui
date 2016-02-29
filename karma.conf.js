@@ -1,7 +1,7 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['jasmine'],
+        frameworks: ['mocha', 'chai'],
         files: [
 			'node_modules/babel-polyfill/dist/polyfill.js',
             'dist/Meld.js',

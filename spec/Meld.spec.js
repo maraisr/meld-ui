@@ -14,7 +14,7 @@ describe('Creation', function () {
 
 		expect(function() {
 			m.render()
-		}).toThrow();
+		}).to.throw();
 	});
 
 
@@ -29,7 +29,7 @@ describe('Creation', function () {
 
 			m.render(context);
 
-			expect(context.getElementsByTagName('input').length == 3).toEqual(true);
+			expect(context.getElementsByTagName('input').length == 3).to.be.true;
 		});
 
 		it('is wrapped in a form tag', function () {
@@ -41,7 +41,7 @@ describe('Creation', function () {
 
 			m.render(context);
 
-			expect(context.getElementsByTagName('form').length == 1).toEqual(true);
+			expect(context.getElementsByTagName('form').length == 1).to.be.true;
 		});
 
 		it('groups binding\'s', function () {
@@ -59,7 +59,7 @@ describe('Creation', function () {
 
 			m.render(context);
 
-			expect(context.getElementsByTagName('legend')[0].innerText == 'address').toEqual(true);
+			expect(context.getElementsByTagName('legend')[0].innerText == 'address').to.be.true;
 		});
 
 	});

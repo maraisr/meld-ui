@@ -29,16 +29,18 @@
 		"babel-polyfill": "^6.5.0",
 		"babel-preset-es2015-rollup": "^1.1.1",
 		"babel-preset-stage-2": "^6.5.0",
-		"jasmine-core": "^2.4.1",
+		"chai": "^3.5.0",
+		"cross-env": "^1.0.7",
 		"karma": "^0.13.21",
+		"karma-chai": "^0.1.0",
 		"karma-cli": "~0.1.2",
-		"karma-jasmine": "^0.3.7",
+		"karma-mocha": "^0.2.2",
 		"karma-phantomjs-launcher": "~1.0.0",
+		"mocha": "^2.4.5",
 		"phantomjs-prebuilt": "^2.1.4",
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
 		"uglifyjs": "^2.4.10",
-		"watch": "^0.17.1",
-		"cross-env": "^1.0.7"
+		"watch": "^0.17.1"
 	}
 }
