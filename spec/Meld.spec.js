@@ -5,14 +5,30 @@ describe('Creation', function () {
 	var context = document.createElement('div');
 	context.setAttribute('id', 'app');
 
+	var mockPayload = {
+		'name': 'Leanne Graham',
+		'email': 'Sincere@april.biz',
+		'website': 'hildegard.org',
+		'address': {
+			'street': 'Kulas Light',
+			'suite': 'Apt. 556',
+			'city': 'Gwenborough',
+			'zipcode': '92998-3874'
+		}
+	};
+
 	afterEach(function () {
 		context.innerHTML = '';
+	});
+
+	beforeEach(function () {
+		document.body.appendChild(context);
 	});
 
 	it('throw when no binds', function () {
 		var m = new Meld.Ui();
 
-		expect(function() {
+		expect(function () {
 			m.render()
 		}).to.throw();
 	});
@@ -33,11 +49,7 @@ describe('Creation', function () {
 		});
 
 		it('is wrapped in a form tag', function () {
-			var m = new Meld.Ui({
-				'name': 'Leanne Graham',
-				'email': 'Sincere@april.biz',
-				'website': 'hildegard.org'
-			});
+			var m = new Meld.Ui(mockPayload);
 
 			m.render(context);
 
@@ -45,21 +57,21 @@ describe('Creation', function () {
 		});
 
 		it('groups binding\'s', function () {
-			var m = new Meld.Ui({
-				'name': 'Leanne Graham',
-				'email': 'Sincere@april.biz',
-				'website': 'hildegard.org',
-				'address': {
-					'street': 'Kulas Light',
-					'suite': 'Apt. 556',
-					'city': 'Gwenborough',
-					'zipcode': '92998-3874'
-				}
-			});
+			var m = new Meld.Ui(mockPayload);
 
 			m.render(context);
 
 			expect(context.getElementsByTagName('legend')[0].innerText == 'address').to.be.true;
+		});
+
+		it('destories', function () {
+			var m = new Meld.Ui(mockPayload);
+
+			m.render(context);
+
+			m.destory();
+
+			expect(document.getElementById('app')).to.be.null;
 		});
 
 	});

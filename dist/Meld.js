@@ -236,6 +236,14 @@
                     this.struct = config;
                     return this;
                 }
+            }, {
+                key: 'destory',
+                value: function destory() {
+                    if (this.elm.parentNode) {
+                        this.elm.parentNode.removeChild(this.elm);
+                    }
+                    return true;
+                }
             }]);
             return Ui;
         }();

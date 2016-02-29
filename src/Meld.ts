@@ -7,8 +7,8 @@ export module Meld {
 	interface UiStructure {
 		field?: string;
 		display?: string;
-		group?:string;
-		class?:string;
+		group?: string;
+		class?: string;
 	}
 
     export class Ui {
@@ -82,6 +82,15 @@ export module Meld {
 		structure(config: Array<UiStructure>): Ui {
 			this.struct = config;
 			return this;
+		}
+
+		destory(): Boolean {
+
+			if (this.elm.parentNode) {
+				this.elm.parentNode.removeChild(this.elm);
+			}
+
+			return true;
 		}
     }
 }
