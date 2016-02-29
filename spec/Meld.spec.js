@@ -65,13 +65,29 @@ describe('Creation', function () {
 			expect(context.getElementsByTagName('form').length == 1).to.be.true;
 		});
 
-		it('groups binding\'s', function () {
+		it('group binding\'s', function () {
 			var m = new Meld.Ui(mockPayload);
 
 			m.render(context);
 
 			expect(context.getElementsByTagName('legend')[0].innerText == 'address').to.be.true;
 		});
+
+		it('group css class', function () {
+			var m = new Meld.Ui(mockPayload);
+
+			m.structure([
+				{
+					group: 'address',
+					display: 'Address',
+					class: 'form-group'
+				}
+			]);
+
+			m.render(context);
+
+			expect(context.getElementsByClassName('form-group')).to.have.length(1);
+		})
 
 	});
 

@@ -1,4 +1,4 @@
-import {Common} from 'helpers/Common';
+import {Common, UiStructure} from 'helpers/Common';
 
 export module Render {
 	export class Rndr {
@@ -27,11 +27,15 @@ export module Render {
 
 		private fields: Array<any> = new Array();
 
-		constructor(name: string) {
+		constructor(struct:UiStructure) {
 			let grp = document.createElement('fieldset'),
 				lgnd = document.createElement('legend');
 
-			lgnd.innerText = name;
+			lgnd.innerText = struct.display;
+
+			if (struct.class) {
+				grp.className = struct.class;
+			}
 
 			grp.appendChild(lgnd);
 

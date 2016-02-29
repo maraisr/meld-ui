@@ -1,16 +1,7 @@
 import {Render as r} from 'Render';
-import {Common} from 'helpers/Common';
+import {Common, UiStructure} from 'helpers/Common';
 
 export module Meld {
-	const __CHILDREN: string = '__children__';
-
-	interface UiStructure {
-		field?: string;
-		display?: string;
-		group?: string;
-		class?: string;
-	}
-
     export class Ui {
 		public elm: HTMLElement;
 		public struct: Array<UiStructure> = new Array();
@@ -40,13 +31,20 @@ export module Meld {
 						let structure = this.struct.filter((v: UiStructure) => {
 							return v.group == key;
 						}),
-							name = key;
+							sendStruct: UiStructure;
 
 						if (structure.length > 0) {
-							name = structure[0].display || key;
+							sendStruct = {
+								display: structure[0].display || key,
+								class: structure[0].class || void 0
+							}
+						} else {
+							sendStruct = {
+								display: key
+							}
 						}
 
-						var grp = new r.Group(name);
+						var grp = new r.Group(sendStruct);
 						grp.set(this.build(val));
 						returns.push(grp);
 						break;

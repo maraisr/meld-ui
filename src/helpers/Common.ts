@@ -3,3 +3,11 @@ export class Common {
 		return Math.random().toString(36).substr(2, len)
 	}
 }
+
+
+export interface UiStructure {
+	field?: string;
+	display?: string;
+	group?: string;
+	class?: string;
+}

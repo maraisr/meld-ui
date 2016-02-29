@@ -105,13 +105,16 @@
         Render.Rndr = Rndr;
 
         var Group = function () {
-            function Group(name) {
+            function Group(struct) {
                 babelHelpers.classCallCheck(this, Group);
 
                 this.fields = new Array();
                 var grp = document.createElement('fieldset'),
                     lgnd = document.createElement('legend');
-                lgnd.innerText = name;
+                lgnd.innerText = struct.display;
+                if (struct.class) {
+                    grp.className = struct.class;
+                }
                 grp.appendChild(lgnd);
                 this.elm = grp;
             }
@@ -174,8 +177,6 @@
 
     exports.Meld;
     (function (Meld) {
-        var __CHILDREN = '__children__';
-
         var Ui = function () {
             function Ui(binds) {
                 babelHelpers.classCallCheck(this, Ui);
@@ -201,11 +202,18 @@
                                 var structure = _this.struct.filter(function (v) {
                                     return v.group == key;
                                 }),
-                                    name = key;
+                                    sendStruct = undefined;
                                 if (structure.length > 0) {
-                                    name = structure[0].display || key;
+                                    sendStruct = {
+                                        display: structure[0].display || key,
+                                        class: structure[0].class || void 0
+                                    };
+                                } else {
+                                    sendStruct = {
+                                        display: key
+                                    };
                                 }
-                                var grp = new Render.Group(name);
+                                var grp = new Render.Group(sendStruct);
                                 grp.set(_this.build(val));
                                 returns.push(grp);
                                 break;
