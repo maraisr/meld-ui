@@ -8,7 +8,7 @@ module.exports = function (config) {
             'spec/**/*.js'
         ],
         reporters: ['progress'],
-        port: 3303,
+        port: 3304,
         colors: true,
         logLevel: config.LOG_WARN,
         autoWatch: true,
