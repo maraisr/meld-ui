@@ -180,10 +180,10 @@
             function Ui(binds) {
                 babelHelpers.classCallCheck(this, Ui);
 
+                this.struct = new Array();
                 this.fields = new Array();
-                this.built = new Array();
                 if (binds != void 0) {
-                    this.built = this.build(binds);
+                    this.binds = binds;
                 }
                 return this;
             }
@@ -198,7 +198,14 @@
                         var val = binds[key];
                         switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                             case 'object':
-                                var grp = new Render.Group(key);
+                                var structure = _this.struct.filter(function (v) {
+                                    return v.group == key;
+                                }),
+                                    name = key;
+                                if (structure.length > 0) {
+                                    name = structure[0].display || key;
+                                }
+                                var grp = new Render.Group(name);
                                 grp.set(_this.build(val));
                                 returns.push(grp);
                                 break;
@@ -216,12 +223,18 @@
                         throw new Error('Meld: No HTMLElement provided.');
                     }
                     this.elm = elm;
-                    if (this.built.length < 1) {
+                    if (this.binds == void 0) {
                         throw new Error('Meld: Empty bind values, nothing to render');
                     }
                     var _r = new Render.Rndr(Common.hasher());
-                    this.elm.appendChild(_r.render(this.built));
+                    this.elm.appendChild(_r.render(this.build(this.binds)));
                     return this.elm;
+                }
+            }, {
+                key: 'structure',
+                value: function structure(config) {
+                    this.struct = config;
+                    return this;
                 }
             }]);
             return Ui;

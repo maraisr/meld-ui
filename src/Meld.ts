@@ -4,16 +4,23 @@ import {Common} from 'helpers/Common';
 export module Meld {
 	const __CHILDREN: string = '__children__';
 
+	interface UiStructure {
+		field?: string;
+		display?: string;
+		group?:string;
+		class?:string;
+	}
+
     export class Ui {
 		public elm: HTMLElement;
+		public struct: Array<UiStructure> = new Array();
 
 		private fields: Array<any> = new Array();
-
-		private built: Array<any> = new Array();
+		private binds: any;
 
         constructor(binds: any) {
 			if (binds != void 0) {
-				this.built = this.build(binds);
+				this.binds = binds;
 			}
 
 			return this;
@@ -31,7 +38,17 @@ export module Meld {
 
 				switch (typeof val) {
 					case 'object':
-						var grp = new r.Group(key);
+
+						let structure = this.struct.filter((v: UiStructure) => {
+							return v.group == key;
+						}),
+							name = key;
+
+						if (structure.length > 0) {
+							name = structure[0].display || key;
+						}
+
+						var grp = new r.Group(name);
 						grp.set(this.build(val));
 						returns.push(grp);
 						break;
@@ -45,21 +62,26 @@ export module Meld {
 			return returns;
 		}
 
-		render(elm:HTMLElement): HTMLElement {
+		render(elm: HTMLElement): HTMLElement {
 			if (!elm) {
 				throw new Error('Meld: No HTMLElement provided.');
 			}
 
 			this.elm = elm;
 
-			if (this.built.length <1) {
+			if (this.binds == void 0) {
 				throw new Error('Meld: Empty bind values, nothing to render');
 			}
 
 			let _r = new r.Rndr(Common.hasher());
-			this.elm.appendChild(_r.render(this.built));
+			this.elm.appendChild(_r.render(this.build(this.binds)));
 
 			return this.elm;
+		}
+
+		structure(config: Array<UiStructure>): Ui {
+			this.struct = config;
+			return this;
 		}
     }
 }
