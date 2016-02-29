@@ -87,7 +87,81 @@ describe('Creation', function () {
 			m.render(context);
 
 			expect(context.getElementsByClassName('form-group')).to.have.length(1);
-		})
+		});
+
+		describe('wildecard classes', function () {
+			it('on fields', function () {
+				var m = new Meld.Ui(mockPayload);
+
+				m.structure([
+					{
+						field: '*',
+						class: 'form-group'
+					}
+				]);
+
+				m.render(context);
+
+				expect((function () {
+					var classes = [],
+						inputs = context.getElementsByTagName('input');
+
+					for (var i = 0; i < inputs.length; i++) {
+						classes.push(inputs[i].parentElement.className);
+					}
+
+					return classes;
+				})()).to.deep.equal(['form-group', 'form-group', 'form-group', 'form-group', 'form-group', 'form-group', 'form-group']);
+			});
+
+			it('on groups', function () {
+				var m = new Meld.Ui(mockPayload);
+
+				m.structure([
+					{
+						group: '*',
+						class: 'form-group'
+					}
+				]);
+
+				m.render(context);
+
+				expect((function () {
+					var classes = [],
+						inputs = context.getElementsByTagName('fieldset');
+
+					for (var i = 0; i < inputs.length; i++) {
+						classes.push(inputs[i].className);
+					}
+
+					return classes;
+				})()).to.deep.equal(['form-group']);
+			});
+
+			it('on inputs', function() {
+				var m = new Meld.Ui(mockPayload);
+
+				m.structure([
+					{
+						input: '*',
+						class: 'form-control'
+					}
+				]);
+
+				m.render(context);
+
+				expect((function () {
+					var classes = [],
+						inputs = context.getElementsByTagName('input');
+
+					for (var i = 0; i < inputs.length; i++) {
+						classes.push(inputs[i].className);
+					}
+
+					return classes;
+				})()).to.deep.equal(['form-control', 'form-control', 'form-control', 'form-control', 'form-control', 'form-control', 'form-control']);
+			});
+		});
 
 	});
 

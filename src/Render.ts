@@ -58,19 +58,24 @@ export module Render {
 	}
 
 	class Bind {
-		public name: string;
-		public value: string;
+		public struct:UiStructure;
 		public hash: string;
 
 		public elm: HTMLElement;
 
-		constructor(name: string, value: any) {
-			this.name = name;
+		public value:any;
+
+		constructor(struct:UiStructure, value:any) {
+			this.struct = struct;
 			this.value = value;
 
 			this.hash = Common.hasher();
 
 			this.elm = document.createElement('div');
+
+			if (struct.class) {
+				this.elm.className = struct.class;
+			}
 		}
 	}
 
@@ -84,6 +89,10 @@ export module Render {
 
 			elm.setAttribute('name', this.hash);
 			elm.setAttribute('value', this.value);
+
+			if (this.struct.inputClass) {
+				elm.className = this.struct.inputClass;
+			}
 
 			return this.elm;
 		}

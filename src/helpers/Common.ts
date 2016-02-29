@@ -4,10 +4,11 @@ export class Common {
 	}
 }
 
-
 export interface UiStructure {
 	field?: string;
-	display?: string;
 	group?: string;
+	input?:string;
+	display?: string;
 	class?: string;
+	inputClass?:string;
 }

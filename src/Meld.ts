@@ -1,5 +1,6 @@
 import {Render as r} from 'Render';
 import {Common, UiStructure} from 'helpers/Common';
+import {Config} from 'helpers/Config';
 
 export module Meld {
     export class Ui {
@@ -17,6 +18,55 @@ export module Meld {
 			return this;
         }
 
+		private findStructure(which: string, search: string): UiStructure {
+			let structure = this.struct.filter((v: UiStructure) => {
+				return v[which] == search;
+			}),
+				sendStruct: UiStructure,
+				found: Boolean = false;
+
+			if (structure.length == 1) {
+				found = true;
+				sendStruct = {
+					display: structure[0].display || search,
+					class: structure[0].class || void 0
+				}
+			} else {
+				sendStruct = {
+					display: search
+				}
+			}
+
+			switch (which) {
+				case 'group':
+				case 'field':
+					var tmp = this.struct.filter((v: UiStructure) => {
+						return v[which] == '*';
+					});
+
+					if (tmp.length > 0) {
+						if (sendStruct.class == void 0) {
+							sendStruct.class = tmp[0].class || void 0;
+						}
+					}
+					break;
+			}
+
+			sendStruct.inputClass = ((): string => {
+				var tmp = this.struct.filter((v: UiStructure) => {
+					return v.input == '*';
+				});
+
+				if (tmp.length > 0) {
+					return tmp[0].class || void 0;
+				}
+
+				return void 0;
+			})();
+
+			return sendStruct;
+		}
+
 		// TODO: Move all DOM augments to an engine of somesort, so that we canship to virtual DOM down the tack
 
 		private build(binds: any): Array<any> {
@@ -27,30 +77,13 @@ export module Meld {
 
 				switch (typeof val) {
 					case 'object':
-
-						let structure = this.struct.filter((v: UiStructure) => {
-							return v.group == key;
-						}),
-							sendStruct: UiStructure;
-
-						if (structure.length > 0) {
-							sendStruct = {
-								display: structure[0].display || key,
-								class: structure[0].class || void 0
-							}
-						} else {
-							sendStruct = {
-								display: key
-							}
-						}
-
-						var grp = new r.Group(sendStruct);
+						var grp = new r.Group(this.findStructure('group', key));
 						grp.set(this.build(val));
 						returns.push(grp);
 						break;
 
 					case 'string':
-						returns.push(new r.Text(key, val));
+						returns.push(new r.Text(this.findStructure('field', key), val));
 						break;
 				}
 			});
