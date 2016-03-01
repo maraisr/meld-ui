@@ -78,22 +78,31 @@ export module Meld {
 
 				switch (typeof val) {
 					case 'object':
-						var struct = this.findStructure('group', key),
-							grp = new r.Group(struct);
-						grp.set(this.build(val));
-						pusher = grp;
+						var struct = this.findStructure('group', key);
+
+						if (!struct.hide) {
+							var grp = new r.Group(struct);
+							grp.set(this.build(val));
+							pusher = grp;
+						}
+
 						break;
 					case 'number':
 					case 'string':
+					case 'boolean':
 						var struct = this.findStructure('field', key);
 
 						if (!struct.hide) {
-							if (typeof val == 'string') {
-								pusher = new r.Text(struct, val);
-							} else {
-								pusher = new r.Number(struct, val);
+							switch (typeof val) {
+								case 'string':
+									pusher = new r.Text(struct, val);
+									break;
+								case 'number':
+									pusher = new r.Number(struct, val);
+									break;
 							}
 						}
+
 						break;
 				}
 
