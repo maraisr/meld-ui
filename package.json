@@ -16,8 +16,11 @@
 		"url": "git+https://github.com/maraisr/meld-ui.git"
 	},
 	"keywords": [
-		"js",
-		"oim"
+		"meld",
+		"dynamic",
+		"oim",
+		"json",
+		"schema"
 	],
 	"author": "Marais Rossouw",
 	"license": "GPL-2.0",
@@ -26,7 +29,7 @@
 	},
 	"homepage": "https://github.com/maraisr/meld-ui#readme",
 	"devDependencies": {
-		"babel-polyfill": "^6.5.0",
+		"babel-polyfill": "^6.6.1",
 		"babel-preset-es2015-rollup": "^1.1.1",
 		"babel-preset-stage-2": "^6.5.0",
 		"chai": "^3.5.0",

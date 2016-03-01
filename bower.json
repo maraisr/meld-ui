@@ -1,14 +1,17 @@
 {
 	"name": "meld-ui",
 	"description": "The real world OIM library for JavaScript!",
-	"main": "dist/solution.js",
+	"main": "dist/Meld.min.js",
 	"authors": [
 		"Marais Rossouw"
 	],
 	"license": "GPL-2.0",
 	"keywords": [
-		"js",
-		"oim"
+		"meld",
+		"dynamic",
+		"oim",
+		"json",
+		"schema"
 	],
 	"homepage": "https://github.com/maraisr/meld-ui",
 	"moduleType": [
