@@ -20,7 +20,11 @@
 		"dynamic",
 		"oim",
 		"json",
-		"schema"
+		"schema",
+		"render",
+		"structure",
+		"library",
+		"json render"
 	],
 	"author": "Marais Rossouw",
 	"license": "GPL-2.0",

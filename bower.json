@@ -11,7 +11,11 @@
 		"dynamic",
 		"oim",
 		"json",
-		"schema"
+		"schema",
+		"render",
+		"structure",
+		"library",
+		"json render"
 	],
 	"homepage": "https://github.com/maraisr/meld-ui",
 	"moduleType": [
