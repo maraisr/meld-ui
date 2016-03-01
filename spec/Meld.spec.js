@@ -70,7 +70,7 @@ describe('Creation', function () {
 
 			m.render(context);
 
-			expect(context.getElementsByTagName('legend')[0].innerText == 'address').to.be.true;
+			expect(context.getElementsByTagName('legend')[0].innerText == 'Address').to.be.true;
 		});
 
 		it('group css class', function () {
@@ -163,6 +163,14 @@ describe('Creation', function () {
 			});
 		});
 
+		it('title case', function() {
+			var m = new Meld.Ui({
+				'test test': 'test'
+			});
+			m.render(context);
+
+			expect(context.getElementsByTagName('input')[0].placeholder).to.equal('Test Test');
+		});
 	});
 
 });

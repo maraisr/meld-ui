@@ -25,8 +25,6 @@ bower i meld-ui --save
 Down the line this'll all be configurable, in terms of rendering, display names, with labels, with validation and all that jaz.
 
 ```JavaScript
-var context = document.createElement('div');
-
 var m = new Meld.Ui({
 	name: 'Leanne Graham',
 	details: {
@@ -41,53 +39,7 @@ var m = new Meld.Ui({
 	}
 });
 
-m.structure([
-	{
-		group: 'details',
-		display: 'Display'
-	},
-	{
-		group: 'address',
-		display: 'Address'
-	}
-]);
-
-m.render(context);
-
-```
-Will produce:
-```HTML
-<div>
-	<form id="71rcpuo">
-		<div>
-			<input name="n767bgg" type="text" value="Leanne Graham">
-		</div>
-		<fieldset>
-			<legend>Display</legend>
-			<div>
-				<input name="afks2ws" type="text" value="Sincere@april.biz">
-			</div>
-			<div>
-				<input name="04i7n1x" type="text" value="hildegard.org">
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>Address</legend>
-			<div>
-				<input name="a2b1312" type="text" value="Kulas Light">
-			</div>
-			<div>
-				<input name="iupkgz1" type="text" value="Apt. 556">
-			</div>
-			<div>
-				<input name="xqtpank" type="text" value="Gwenborough">
-			</div>
-			<div>
-				<input name="rauhkk7" type="text" value="92998-3874">
-			</div>
-		</fieldset>
-	</form>
-</div>
+m.render(document.getElementById('app'));
 ```
 
 ## Building

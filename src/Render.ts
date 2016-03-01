@@ -13,7 +13,7 @@ export module Render {
 			this.elm.setAttribute('id', name);
 		}
 
-		render(fields:Array<any>): HTMLElement {
+		render(fields: Array<any>): HTMLElement {
 			fields.forEach((v) => {
 				this.elm.appendChild(v.deligate());
 			});
@@ -27,7 +27,7 @@ export module Render {
 
 		private fields: Array<any> = new Array();
 
-		constructor(struct:UiStructure) {
+		constructor(struct: UiStructure) {
 			let grp = document.createElement('fieldset'),
 				lgnd = document.createElement('legend');
 
@@ -58,14 +58,14 @@ export module Render {
 	}
 
 	class Bind {
-		public struct:UiStructure;
+		public struct: UiStructure;
 		public hash: string;
 
 		public elm: HTMLElement;
 
-		public value:any;
+		public value: any;
 
-		constructor(struct:UiStructure, value:any) {
+		constructor(struct: UiStructure, value: any) {
 			this.struct = struct;
 			this.value = value;
 
@@ -77,22 +77,52 @@ export module Render {
 				this.elm.className = struct.class;
 			}
 		}
-	}
 
-	export class Text extends Bind {
-		deligate(): HTMLElement {
-
+		generateElement(): HTMLElement {
 			let elm = document.createElement('input');
-			this.elm.appendChild(elm);
 
-			elm.setAttribute('type', 'text');
-
+			elm.setAttribute('id', this.hash);
 			elm.setAttribute('name', this.hash);
 			elm.setAttribute('value', this.value);
+
+			elm.setAttribute('placeholder', this.struct.display);
 
 			if (this.struct.inputClass) {
 				elm.className = this.struct.inputClass;
 			}
+
+			return elm;
+		}
+
+		generateLabel():HTMLElement {
+			let elm =  document.createElement('label');
+
+			elm.setAttribute('for', this.hash);
+			elm.innerText = this.struct.display;
+
+			return elm;
+		}
+	}
+
+	export class Text extends Bind {
+		deligate(): HTMLElement {
+			let elm = this.generateElement();
+			elm.setAttribute('type', 'text');
+
+			this.elm.appendChild(this.generateLabel());
+			this.elm.appendChild(elm);
+
+			return this.elm;
+		}
+	}
+
+	export class Number extends Bind {
+		deligate(): HTMLElement {
+			let elm = this.generateElement();
+			elm.setAttribute('type', 'number');
+
+			this.elm.appendChild(this.generateLabel());
+			this.elm.appendChild(elm);
 
 			return this.elm;
 		}

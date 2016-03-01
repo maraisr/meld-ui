@@ -28,12 +28,12 @@ export module Meld {
 			if (structure.length == 1) {
 				found = true;
 				sendStruct = {
-					display: structure[0].display || search,
+					display: structure[0].display || Common.titleCase(search),
 					class: structure[0].class || void 0
 				}
 			} else {
 				sendStruct = {
-					display: search
+					display: Common.titleCase(search)
 				}
 			}
 
@@ -68,7 +68,6 @@ export module Meld {
 		}
 
 		// TODO: Move all DOM augments to an engine of somesort, so that we canship to virtual DOM down the tack
-
 		private build(binds: any): Array<any> {
 			var returns = [];
 
@@ -81,9 +80,11 @@ export module Meld {
 						grp.set(this.build(val));
 						returns.push(grp);
 						break;
-
 					case 'string':
 						returns.push(new r.Text(this.findStructure('field', key), val));
+						break;
+					case 'number':
+						returns.push(new r.Number(this.findStructure('field', key), val));
 						break;
 				}
 			});
@@ -108,7 +109,6 @@ export module Meld {
 			return this.elm;
 		}
 
-		// TODO: Add a function for config, so that each object key can get a "style, or width properties"
 		structure(config: Array<UiStructure>): Ui {
 			this.struct = config;
 			return this;
