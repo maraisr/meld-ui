@@ -6,7 +6,7 @@
 	"scripts": {
 		"clean": "rm -rf dist/* tmp/*",
 		"test": "karma start --single-run",
-		"build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats",
+		"build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats && node gen-license.js",
 		"dev": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js",
 		"watch:test": "karma start --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
@@ -31,7 +31,7 @@
 	"bugs": {
 		"url": "https://github.com/maraisr/meld-ui/issues"
 	},
-	"homepage": "https://github.com/maraisr/meld-ui#readme",
+	"homepage": "https://github.com/maraisr/meld-ui",
 	"devDependencies": {
 		"babel-polyfill": "^6.6.1",
 		"babel-preset-es2015-rollup": "^1.1.1",

@@ -1,3 +1,12 @@
+/** meld-ui - The real world OIM library for JavaScript!
+ *
+ * @version v0.0.10
+ * @author Marais Rossouw
+ * @link https://github.com/maraisr/meld-ui
+ * @license GPL-2.0
+ *
+ * @providesModule Meld
+ */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
