@@ -29,7 +29,8 @@ export module Meld {
 				found = true;
 				sendStruct = {
 					display: structure[0].display || Common.titleCase(search),
-					class: structure[0].class || void 0
+					class: structure[0].class || void 0,
+					hide: structure[0].hide || false
 				}
 			} else {
 				sendStruct = {
@@ -72,20 +73,32 @@ export module Meld {
 			var returns = [];
 
 			Object.keys(binds).forEach((key) => {
-				let val = binds[key];
+				let val = binds[key],
+					pusher: any;
 
 				switch (typeof val) {
 					case 'object':
-						var grp = new r.Group(this.findStructure('group', key));
+						var struct = this.findStructure('group', key),
+							grp = new r.Group(struct);
 						grp.set(this.build(val));
-						returns.push(grp);
-						break;
-					case 'string':
-						returns.push(new r.Text(this.findStructure('field', key), val));
+						pusher = grp;
 						break;
 					case 'number':
-						returns.push(new r.Number(this.findStructure('field', key), val));
+					case 'string':
+						var struct = this.findStructure('field', key);
+
+						if (!struct.hide) {
+							if (typeof val == 'string') {
+								pusher = new r.Text(struct, val);
+							} else {
+								pusher = new r.Number(struct, val);
+							}
+						}
 						break;
+				}
+
+				if (pusher) {
+					returns.push(pusher);
 				}
 			});
 

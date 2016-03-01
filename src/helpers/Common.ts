@@ -17,4 +17,5 @@ export interface UiStructure {
 	display?: string;
 	class?: string;
 	inputClass?: string;
+	hide?: Boolean;
 }
