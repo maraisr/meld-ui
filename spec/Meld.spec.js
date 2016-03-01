@@ -57,18 +57,25 @@ describe('Creation', function () {
 			expect(context.getElementsByTagName('input').length == 3).to.be.true;
 		});
 
-		it('is wrapped in a form tag', function () {
-			var m = new Meld.Ui(mockPayload);
+		it('a checkbox', function () {
+			(new Meld.Ui({
+				'test': true
+			})).render(context);
 
-			m.render(context);
+			expect((function () {
+				var a = context.getElementsByTagName('input')[0];
+				return a.type;
+			})()).to.equal('checkbox');
+		});
+
+		it('is wrapped in a form tag', function () {
+			(new Meld.Ui(mockPayload)).render(context);
 
 			expect(context.getElementsByTagName('form').length == 1).to.be.true;
 		});
 
 		it('group binding\'s', function () {
-			var m = new Meld.Ui(mockPayload);
-
-			m.render(context);
+			(new Meld.Ui(mockPayload)).render(context);
 
 			expect(context.getElementsByTagName('legend')[0].innerText == 'Address').to.be.true;
 		});
@@ -138,7 +145,7 @@ describe('Creation', function () {
 				})()).to.deep.equal(['form-group']);
 			});
 
-			it('on inputs', function() {
+			it('on inputs', function () {
 				var m = new Meld.Ui(mockPayload);
 
 				m.structure([
@@ -163,11 +170,10 @@ describe('Creation', function () {
 			});
 		});
 
-		it('title case', function() {
-			var m = new Meld.Ui({
+		it('title case', function () {
+			(new Meld.Ui({
 				'test test': 'test'
-			});
-			m.render(context);
+			})).render(context);
 
 			expect(context.getElementsByTagName('input')[0].placeholder).to.equal('Test Test');
 		});

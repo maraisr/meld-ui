@@ -78,7 +78,7 @@ export module Render {
 			}
 		}
 
-		generateElement(): HTMLElement {
+		generateInput(): HTMLElement {
 			let elm = document.createElement('input');
 
 			elm.setAttribute('id', this.hash);
@@ -94,8 +94,8 @@ export module Render {
 			return elm;
 		}
 
-		generateLabel():HTMLElement {
-			let elm =  document.createElement('label');
+		generateLabel(): HTMLElement {
+			let elm = document.createElement('label');
 
 			elm.setAttribute('for', this.hash);
 			elm.innerText = this.struct.display;
@@ -106,7 +106,7 @@ export module Render {
 
 	export class Text extends Bind {
 		deligate(): HTMLElement {
-			let elm = this.generateElement();
+			let elm = this.generateInput();
 			elm.setAttribute('type', 'text');
 
 			this.elm.appendChild(this.generateLabel());
@@ -118,11 +118,31 @@ export module Render {
 
 	export class Number extends Bind {
 		deligate(): HTMLElement {
-			let elm = this.generateElement();
+			let elm = this.generateInput();
 			elm.setAttribute('type', 'number');
 
 			this.elm.appendChild(this.generateLabel());
 			this.elm.appendChild(elm);
+
+			return this.elm;
+		}
+	}
+
+	export class Binary extends Bind {
+		deligate(): HTMLElement {
+			let elm = this.generateInput();
+			elm.setAttribute('type', 'checkbox');
+			elm.removeAttribute('value');
+			elm.removeAttribute('placeholder');
+
+			if (this.value === true) {
+				elm.setAttribute('checked', 'checked');
+			}
+
+			let lbl = this.generateLabel();
+			lbl.insertBefore(elm, lbl.firstChild);
+
+			this.elm.appendChild(lbl);
 
 			return this.elm;
 		}

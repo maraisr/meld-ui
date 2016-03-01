@@ -100,6 +100,10 @@ export module Meld {
 								case 'number':
 									pusher = new r.Number(struct, val);
 									break;
+								case 'boolean':
+									struct.inputClass = void 0;
+									pusher = new r.Binary(struct, val);
+									break;
 							}
 						}
 
