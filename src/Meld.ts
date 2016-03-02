@@ -84,6 +84,10 @@ export module Meld {
 				let val = binds[key],
 					pusher: any;
 
+				if (val == void 0 || val == null) {
+					val = '';
+				}
+
 				switch (typeof val) {
 					case 'object':
 						var struct = this.findStructure('group', key);
