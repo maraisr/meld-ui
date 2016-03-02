@@ -2,18 +2,28 @@
 	"name": "meld-ui",
 	"version": "0.0.10",
 	"description": "The real world OIM library for JavaScript!",
-	"main": "dist/Meld.min.js",
+	"author": "Marais Rossouw",
+	"license": "GPL-2.0",
 	"scripts": {
 		"clean": "rm -rf dist/* tmp/*",
-		"test": "karma start --single-run",
-		"build": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats && node gen-license.js",
+		"test": "karma start build/karma.conf.js --single-run",
+		"build": "tsc && node build/build.js",
 		"dev": "cross-env NODE_ENV=development tsc && rollup -c=rollup.config.js",
-		"watch:test": "karma start --auto-watch",
+		"watch:test": "karma start build/karma.conf.js --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
 	},
+	"main": "dist/meld.min.js",
+	"files": [
+		"dist/meld.js",
+		"dist/meld.min.js"
+	],
+	"homepage": "https://github.com/maraisr/meld-ui",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/maraisr/meld-ui.git"
+	},
+	"bugs": {
+		"url": "https://github.com/maraisr/meld-ui/issues"
 	},
 	"keywords": [
 		"meld",
@@ -26,12 +36,6 @@
 		"library",
 		"json render"
 	],
-	"author": "Marais Rossouw",
-	"license": "GPL-2.0",
-	"bugs": {
-		"url": "https://github.com/maraisr/meld-ui/issues"
-	},
-	"homepage": "https://github.com/maraisr/meld-ui",
 	"devDependencies": {
 		"babel-polyfill": "^6.6.1",
 		"babel-preset-es2015-rollup": "^1.1.1",
@@ -45,8 +49,10 @@
 		"karma-phantomjs-launcher": "~1.0.0",
 		"mocha": "^2.4.5",
 		"phantomjs-prebuilt": "^2.1.4",
+		"rollup": "^0.25.4",
 		"rollup-plugin-babel": "^2.4.0",
 		"rollup-plugin-includepaths": "^0.1.1",
+		"typescript": "^1.8.7",
 		"uglifyjs": "^2.4.10",
 		"watch": "^0.17.1"
 	}

@@ -3,9 +3,9 @@ module.exports = function (config) {
         basePath: '',
         frameworks: ['mocha', 'chai'],
         files: [
-			'node_modules/babel-polyfill/dist/polyfill.js',
-            'dist/Meld.js',
-            'spec/**/*.js'
+			'../node_modules/babel-polyfill/dist/polyfill.js',
+            '../dist/Meld.js',
+            '../spec/**/*.js'
         ],
         reporters: ['progress'],
         port: 3304,

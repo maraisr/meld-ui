@@ -43,7 +43,7 @@ m.render(document.getElementById('app'));
 ```
 
 ## Building
-- `npm i -g tsc`
+- `npm i -g typescript`
 - `npm i`
 - `npm run watch:dev`
 
