@@ -1,6 +1,6 @@
 /** meld-ui - The real world OIM library for JavaScript!
  *
- * @version v0.0.10
+ * @version v0.0.11
  * @author Marais Rossouw
  * @link https://github.com/maraisr/meld-ui
  * @license GPL-2.0
