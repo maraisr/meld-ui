@@ -4,7 +4,7 @@ module.exports = function (config) {
         frameworks: ['mocha', 'chai'],
         files: [
 			'../node_modules/babel-polyfill/dist/polyfill.js',
-            '../dist/Meld.js',
+            '../dist/meld.js',
             '../spec/**/*.js'
         ],
         reporters: ['progress'],
