@@ -2,6 +2,8 @@ import {Render as r} from 'Render';
 import {Common, UiStructure} from 'helpers/Common';
 import {Config} from 'helpers/Config';
 
+let uid = 0;
+
 export module Meld {
     export class Ui {
 		public elm: HTMLElement;
@@ -10,10 +12,16 @@ export module Meld {
 		private fields: Array<any> = new Array();
 		private binds: any;
 
+		private _uid: number;
+		private _isMeld: Boolean;
+
         constructor(binds: any) {
 			if (binds != void 0) {
 				this.binds = binds;
 			}
+
+			this._uid = uid++;
+			this._isMeld = true;
 
 			return this;
         }

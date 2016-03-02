@@ -6,8 +6,8 @@
 	"scripts": {
 		"clean": "rm -rf dist/* tmp/*",
 		"test": "karma start --single-run",
-		"build": "npm run dev && cross-env NODE_ENV=production uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats && node gen-license.js",
-		"dev": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js",
+		"build": "cross-env NODE_ENV=production tsc && rollup -c=rollup.config.js && uglifyjs dist/Meld.js -c -m -o dist/Meld.min.js --stats && node gen-license.js",
+		"dev": "cross-env NODE_ENV=development tsc && rollup -c=rollup.config.js",
 		"watch:test": "karma start --auto-watch",
 		"watch:dev": "watch 'npm run dev' src"
 	},
