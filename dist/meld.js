@@ -10,7 +10,7 @@
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    typeof define === 'function' && define.amd ? define('meld', ['exports'], factory) :
     (factory((global.Meld = global.Meld || {})));
 }(this, function (exports) { 'use strict';
 

@@ -39,6 +39,7 @@ rollup.rollup({
 		var code = bundle.generate({
 			format: 'umd',
 			moduleName: 'Meld',
+			moduleId: 'meld',
 			banner: banner
 		}).code;
 

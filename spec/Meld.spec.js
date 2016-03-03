@@ -57,15 +57,31 @@ describe('Creation', function () {
 			expect(context.getElementsByTagName('input').length == 3).to.be.true;
 		});
 
+		it('number input', function() {
+			var m = new Meld.Ui({
+				'age': 17
+			});
+
+			m.render(context);
+
+			expect(context.getElementsByTagName('input')[0].type).to.equal('number');
+		});
+
+		it('defaults falsey values to blank', function() {
+			(new Meld.Ui({
+				'a': void 0,
+				'b': null
+			})).render(context);
+
+			expect([context.getElementsByTagName('input')[1].value, context.getElementsByTagName('input')[1].value]).to.deep.equal(['', '']);
+		});
+
 		it('a checkbox', function () {
 			(new Meld.Ui({
 				'test': true
 			})).render(context);
 
-			expect((function () {
-				var a = context.getElementsByTagName('input')[0];
-				return a.type;
-			})()).to.equal('checkbox');
+			expect(context.getElementsByTagName('input')[0].type).to.equal('checkbox');
 		});
 
 		it('is wrapped in a form tag', function () {
