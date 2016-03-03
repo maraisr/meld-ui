@@ -8,7 +8,7 @@ MELD UI
 [![License](https://img.shields.io/npm/l/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui/blob/master/LICENSE.md)
 
 ## Intro
-Meld Ui is a small lightweight library per say, aiding in a flexable unobtrusive take on JavaScript plain objects and renders a form, with a simple API. If you're familiar with OIM's this is one.
+Meld Ui is a small lightweight library per say, aiding in a flexable unobtrusive take on JavaScript plain objects that renders a form, with a simple API. If you're familiar with OIM's... this is one.
 
 ## Installation
 Install Meld UI using [npm](https://docs.npmjs.com/):
