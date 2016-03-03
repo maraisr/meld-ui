@@ -1,5 +1,5 @@
 import {Render as r} from 'Render';
-import {Common, UiStructure} from 'helpers/Common';
+import {Common, UiStructure, UiStandard} from 'helpers/Common';
 import {Config} from 'helpers/Config';
 
 let uid = 0;
@@ -15,13 +15,21 @@ export module Meld {
 		private _uid: number;
 		private _isMeld: Boolean;
 
-        constructor(binds: any) {
-			if (binds != void 0) {
-				this.binds = binds;
-			}
+        constructor(config: UiStandard) {
+
+			this.binds = config.binds;
+			this.struct = config.structure || [];
 
 			this._uid = uid++;
 			this._isMeld = true;
+
+			let el: Element = document.body.querySelector(config.elm);
+
+			if (el) {
+				this.elm = <HTMLElement>el;
+			}
+
+			this.render();
 
 			return this;
         }
@@ -130,12 +138,10 @@ export module Meld {
 			return returns;
 		}
 
-		render(elm: HTMLElement): HTMLElement {
-			if (!elm) {
+		private render(): HTMLElement {
+			if (!this.elm) {
 				throw new Error('Meld: No HTMLElement provided.');
 			}
-
-			this.elm = elm;
 
 			if (this.binds == void 0) {
 				throw new Error('Meld: Empty bind values, nothing to render');
@@ -145,11 +151,6 @@ export module Meld {
 			this.elm.appendChild(_r.render(this.build(this.binds)));
 
 			return this.elm;
-		}
-
-		structure(config: Array<UiStructure>): Ui {
-			this.struct = config;
-			return this;
 		}
 
 		destory(): Boolean {

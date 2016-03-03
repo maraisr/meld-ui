@@ -19,3 +19,9 @@ export interface UiStructure {
 	inputClass?: string;
 	hide?: Boolean;
 }
+
+export interface UiStandard {
+	elm: string;
+	binds: any;
+	structure: Array<UiStructure>;
+}

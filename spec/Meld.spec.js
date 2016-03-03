@@ -26,17 +26,16 @@ describe('Creation', function () {
 	});
 
 	it('throw when no binds', function () {
-		var m = new Meld.Ui();
-
 		expect(function () {
-			m.render()
+			new Meld.Ui()
 		}).to.throw();
 	});
 
 	it('destroy\'s', function () {
-		var m = new Meld.Ui(mockPayload);
-
-		m.render(context);
+		var m = new Meld.Ui({
+			elm: '#app',
+			binds: mockPayload
+		});
 
 		m.destory();
 
@@ -46,84 +45,109 @@ describe('Creation', function () {
 	describe('renders', function () {
 
 		it('3 text inputs', function () {
-			var m = new Meld.Ui({
-				'name': 'Leanne Graham',
-				'email': 'Sincere@april.biz',
-				'website': 'hildegard.org'
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'name': 'Leanne Graham',
+					'email': 'Sincere@april.biz',
+					'website': 'hildegard.org'
+				}
 			});
-
-			m.render(context);
 
 			expect(context.getElementsByTagName('input').length == 3).to.be.true;
 		});
 
-		it('number input', function() {
-			var m = new Meld.Ui({
-				'age': 17
+		it('number input', function () {
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'age': 17
+				}
 			});
-
-			m.render(context);
 
 			expect(context.getElementsByTagName('input')[0].type).to.equal('number');
 		});
 
-		it('defaults falsey values to blank', function() {
-			(new Meld.Ui({
-				'a': void 0,
-				'b': null
-			})).render(context);
+		it('defaults falsey values to blank', function () {
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'a': void 0,
+					'b': null
+				}
+			});
 
 			expect([context.getElementsByTagName('input')[1].value, context.getElementsByTagName('input')[1].value]).to.deep.equal(['', '']);
 		});
 
 		it('a checkbox', function () {
-			(new Meld.Ui({
-				'test': true
-			})).render(context);
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'test': true
+				}
+			});
 
 			expect(context.getElementsByTagName('input')[0].type).to.equal('checkbox');
 		});
 
 		it('is wrapped in a form tag', function () {
-			(new Meld.Ui(mockPayload)).render(context);
+			new Meld.Ui({
+				elm: '#app',
+				binds: mockPayload
+			});
 
 			expect(context.getElementsByTagName('form').length == 1).to.be.true;
 		});
 
 		it('group binding\'s', function () {
-			(new Meld.Ui(mockPayload)).render(context);
+			new Meld.Ui({
+				elm: '#app',
+				binds: mockPayload
+			});
 
 			expect(context.getElementsByTagName('legend')[0].innerText == 'Address').to.be.true;
 		});
 
 		it('group css class', function () {
-			var m = new Meld.Ui(mockPayload);
-
-			m.structure([
-				{
-					group: 'address',
-					display: 'Address',
-					class: 'form-group'
-				}
-			]);
-
-			m.render(context);
+			new Meld.Ui({
+				elm: '#app',
+				structure: [
+					{
+						group: 'address',
+						display: 'Address',
+						class: 'form-group'
+					}
+				],
+				binds: mockPayload
+			});
 
 			expect(context.getElementsByClassName('form-group')).to.have.length(1);
 		});
 
+		it('title case', function () {
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'test test': 'test'
+				}
+			});
+
+			expect(context.getElementsByTagName('input')[0].placeholder).to.equal('Test Test');
+		});
+
 		describe('wildecard classes', function () {
 			it('on fields', function () {
-				var m = new Meld.Ui(mockPayload);
-
-				m.structure([
-					{
-						field: '*',
-						class: 'form-group'
-					}
-				]);
-
-				m.render(context);
+				new Meld.Ui({
+					elm: '#app',
+					structure: [
+						{
+							field: '*',
+							class: 'form-group'
+						}
+					],
+					binds: mockPayload
+				});
 
 				expect((function () {
 					var classes = [],
@@ -138,16 +162,16 @@ describe('Creation', function () {
 			});
 
 			it('on groups', function () {
-				var m = new Meld.Ui(mockPayload);
-
-				m.structure([
-					{
-						group: '*',
-						class: 'form-group'
-					}
-				]);
-
-				m.render(context);
+				new Meld.Ui({
+					elm: '#app',
+					structure: [
+						{
+							group: '*',
+							class: 'form-group'
+						}
+					],
+					binds: mockPayload
+				});
 
 				expect((function () {
 					var classes = [],
@@ -162,16 +186,16 @@ describe('Creation', function () {
 			});
 
 			it('on inputs', function () {
-				var m = new Meld.Ui(mockPayload);
-
-				m.structure([
-					{
-						input: '*',
-						class: 'form-control'
-					}
-				]);
-
-				m.render(context);
+				new Meld.Ui({
+					elm: '#app',
+					structure: [
+						{
+							input: '*',
+							class: 'form-control'
+						}
+					],
+					binds: mockPayload
+				});
 
 				expect((function () {
 					var classes = [],
@@ -186,13 +210,6 @@ describe('Creation', function () {
 			});
 		});
 
-		it('title case', function () {
-			(new Meld.Ui({
-				'test test': 'test'
-			})).render(context);
-
-			expect(context.getElementsByTagName('input')[0].placeholder).to.equal('Test Test');
-		});
 	});
 
 });

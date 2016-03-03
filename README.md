@@ -23,19 +23,22 @@ bower i meld-ui --save
 
 ## Example Usage
 ```JavaScript
-(new Meld.Ui({
-	name: 'Leanne Graham',
-	details: {
-		email: 'Sincere@april.biz',
-		website: 'hildegard.org',
-	},
-	address: {
-		street: 'Kulas Light',
-		suite: 'Apt. 556',
-		city: 'Gwenborough',
-		zipcode: '92998-3874'
+new Meld.Ui({
+	elm: '#app',
+	binds: {
+		name: 'Leanne Graham',
+		details: {
+			email: 'Sincere@april.biz',
+			website: 'hildegard.org',
+		},
+		address: {
+			street: 'Kulas Light',
+			suite: 'Apt. 556',
+			city: 'Gwenborough',
+			zipcode: '92998-3874'
+		}
 	}
-})).render(document.getElementById('app'));
+})
 ```
 
 ## Building

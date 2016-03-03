@@ -276,16 +276,20 @@
     exports.Meld;
     (function (Meld) {
         var Ui = function () {
-            function Ui(binds) {
+            function Ui(config) {
                 babelHelpers.classCallCheck(this, Ui);
 
                 this.struct = new Array();
                 this.fields = new Array();
-                if (binds != void 0) {
-                    this.binds = binds;
-                }
+                this.binds = config.binds;
+                this.struct = config.structure || [];
                 this._uid = uid++;
                 this._isMeld = true;
+                var el = document.body.querySelector(config.elm);
+                if (el) {
+                    this.elm = el;
+                }
+                this.render();
                 return this;
             }
 
@@ -384,23 +388,16 @@
                 }
             }, {
                 key: 'render',
-                value: function render(elm) {
-                    if (!elm) {
+                value: function render() {
+                    if (!this.elm) {
                         throw new Error('Meld: No HTMLElement provided.');
                     }
-                    this.elm = elm;
                     if (this.binds == void 0) {
                         throw new Error('Meld: Empty bind values, nothing to render');
                     }
                     var _r = new Render.Rndr(Common.hasher());
                     this.elm.appendChild(_r.render(this.build(this.binds)));
                     return this.elm;
-                }
-            }, {
-                key: 'structure',
-                value: function structure(config) {
-                    this.struct = config;
-                    return this;
                 }
             }, {
                 key: 'destory',
