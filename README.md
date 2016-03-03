@@ -7,9 +7,8 @@ MELD UI
 [![Codecov](https://img.shields.io/codecov/c/github/maraisr/meld-ui.svg?style=flat-square)](https://codecov.io/github/maraisr/meld-ui)
 [![License](https://img.shields.io/npm/l/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui/blob/master/LICENSE.md)
 
-> The beginings of something great!
-
-I aim to create a lightweight framework per say that is unobtrusive, or agnostic of its surroundings. So in essence being able to communicate with Angular, React, Web Components or the old school Vanilla JS. Giving you the wonders of a dynamic OIM (Object Interface Mapper) filling the gap between an ORM and the UI.
+## Intro
+Meld Ui is a small lightweight library per say, aiding in a flexable unobtrusive take on JavaScript plain objects and renders a form, with a simple API. If you're familiar with OIM's this is one.
 
 ## Installation
 Install Meld UI using [npm](https://docs.npmjs.com/):
@@ -22,11 +21,9 @@ Install Meld UI using [bower](http://bower.io/#getting-started):
 bower i meld-ui --save
 ```
 
-## Basic Usage
-Down the line this'll all be configurable, in terms of rendering, display names, with labels, with validation and all that jaz.
-
+## Example Usage
 ```JavaScript
-var m = new Meld.Ui({
+(new Meld.Ui({
 	name: 'Leanne Graham',
 	details: {
 		email: 'Sincere@april.biz',
@@ -38,9 +35,7 @@ var m = new Meld.Ui({
 		city: 'Gwenborough',
 		zipcode: '92998-3874'
 	}
-});
-
-m.render(document.getElementById('app'));
+})).render(document.getElementById('app'));
 ```
 
 ## Building
@@ -53,3 +48,8 @@ m.render(document.getElementById('app'));
 - `npm test`
 
 For a release `npm run build`.
+
+## License
+[GPL-2.0](https://github.com/maraisr/meld-ui/blob/master/LICENSE.md)
+
+Copyright(c) 2016 Marais Rossouw
