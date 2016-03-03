@@ -7,13 +7,22 @@ module.exports = function (config) {
             '../dist/meld.js',
             '../spec/**/*.js'
         ],
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
         port: 3304,
         colors: true,
         logLevel: config.LOG_WARN,
         autoWatch: true,
         browsers: ['PhantomJS'],
         singleRun: false,
-        concurrency: Infinity
+        concurrency: Infinity,
+		preprocessors: {
+			'../dist/meld.js': ['coverage']
+		},
+		coverageReporter: {
+			reporters: [
+				{ type: 'lcov', dir: '../coverage', subdir: '.' },
+				{ type: 'text-summary', dir: '../coverage', subdir: '.' }
+			]
+		}
     })
 }
