@@ -4,6 +4,7 @@ MELD UI
 [![NPM version](https://img.shields.io/npm/v/meld-ui.svg?style=flat-square)](https://www.npmjs.com/package/meld-ui)
 [![Bower version](https://img.shields.io/bower/v/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui)
 [![Travis](https://img.shields.io/travis/maraisr/meld-ui.svg?style=flat-square)](https://travis-ci.org/maraisr/meld-ui)
+[![Codecov](https://img.shields.io/codecov/c/github/maraisr/meld-ui.svg?style=flat-square)](https://codecov.io/github/maraisr/meld-ui)
 [![License](https://img.shields.io/npm/l/meld-ui.svg?style=flat-square)](https://github.com/maraisr/meld-ui/blob/master/LICENSE.md)
 
 > The beginings of something great!
