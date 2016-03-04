@@ -1,4 +1,4 @@
-import {Common, UiStructure} from 'helpers/Common';
+import {Common, UiStructure} from './helpers/Common';
 
 export module Render {
 	export class Rndr {

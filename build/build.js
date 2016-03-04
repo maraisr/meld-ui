@@ -40,6 +40,7 @@ rollup.rollup({
 			format: 'umd',
 			moduleName: 'Meld',
 			moduleId: 'meld',
+			useStrict: true,
 			banner: banner
 		}).code;
 

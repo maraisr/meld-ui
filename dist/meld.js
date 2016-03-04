@@ -285,10 +285,7 @@
                 this.struct = config.structure || [];
                 this._uid = uid++;
                 this._isMeld = true;
-                var el = document.body.querySelector(config.elm);
-                if (el) {
-                    this.elm = el;
-                }
+                this.elm = document.body.querySelector(config.elm);
                 this.render();
                 return this;
             }
@@ -389,11 +386,11 @@
             }, {
                 key: 'render',
                 value: function render() {
-                    if (!this.elm) {
-                        throw new Error('Meld: No HTMLElement provided.');
+                    if (this.elm == void 0) {
+                        throw new ReferenceError('Meld: No HTMLElement provided.');
                     }
                     if (this.binds == void 0) {
-                        throw new Error('Meld: Empty bind values, nothing to render');
+                        throw new ReferenceError('Meld: Empty bind values, nothing to render');
                     }
                     var _r = new Render.Rndr(Common.hasher());
                     this.elm.appendChild(_r.render(this.build(this.binds)));
@@ -402,13 +399,12 @@
             }, {
                 key: 'destory',
                 value: function destory() {
-                    if (this.elm.parentNode) {
+                    if (this.elm) {
                         this.elm.parentNode.removeChild(this.elm);
                         return true;
                     } else {
-                        console.warn('Meld: There was no element to cull.');
+                        throw new ReferenceError('Meld: There was no element to cull.');
                     }
-                    return false;
                 }
             }]);
             return Ui;

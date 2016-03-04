@@ -1,6 +1,6 @@
-import {Render as r} from 'Render';
-import {Common, UiStructure, UiStandard} from 'helpers/Common';
-import {Config} from 'helpers/Config';
+import {Render as r} from './Render';
+import {Common, UiStructure, UiStandard} from './helpers/Common';
+import {Config} from './helpers/Config';
 
 let uid = 0;
 
@@ -23,11 +23,7 @@ export module Meld {
 			this._uid = uid++;
 			this._isMeld = true;
 
-			let el: Element = document.body.querySelector(config.elm);
-
-			if (el) {
-				this.elm = <HTMLElement>el;
-			}
+			this.elm = <HTMLElement>document.body.querySelector(config.elm);
 
 			this.render();
 
@@ -139,12 +135,12 @@ export module Meld {
 		}
 
 		private render(): HTMLElement {
-			if (!this.elm) {
-				throw new Error('Meld: No HTMLElement provided.');
+			if (this.elm == void 0) {
+				throw new ReferenceError('Meld: No HTMLElement provided.');
 			}
 
 			if (this.binds == void 0) {
-				throw new Error('Meld: Empty bind values, nothing to render');
+				throw new ReferenceError('Meld: Empty bind values, nothing to render');
 			}
 
 			let _r = new r.Rndr(Common.hasher());
@@ -154,15 +150,13 @@ export module Meld {
 		}
 
 		destory(): Boolean {
-			if (this.elm.parentNode) {
+			if (this.elm) {
 				this.elm.parentNode.removeChild(this.elm);
 
 				return true;
 			} else {
-				console.warn('Meld: There was no element to cull.');
+				throw new ReferenceError('Meld: There was no element to cull.');
 			}
-
-			return false;
 		}
     }
 }
