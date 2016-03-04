@@ -219,8 +219,37 @@
 
         Render.Text = Text;
 
-        var Number = function (_Bind2) {
-            babelHelpers.inherits(Number, _Bind2);
+        var TextArea = function (_Bind2) {
+            babelHelpers.inherits(TextArea, _Bind2);
+
+            function TextArea() {
+                babelHelpers.classCallCheck(this, TextArea);
+                return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(TextArea).apply(this, arguments));
+            }
+
+            babelHelpers.createClass(TextArea, [{
+                key: 'deligate',
+                value: function deligate() {
+                    var elm = document.createElement('textarea');
+                    elm.setAttribute('id', this.hash);
+                    elm.setAttribute('name', this.hash);
+                    elm.setAttribute('placeholder', this.struct.display);
+                    if (this.struct.inputClass) {
+                        elm.className = this.struct.inputClass;
+                    }
+                    elm.innerText = this.value;
+                    this.elm.appendChild(this.generateLabel());
+                    this.elm.appendChild(elm);
+                    return this.elm;
+                }
+            }]);
+            return TextArea;
+        }(Bind);
+
+        Render.TextArea = TextArea;
+
+        var Number = function (_Bind3) {
+            babelHelpers.inherits(Number, _Bind3);
 
             function Number() {
                 babelHelpers.classCallCheck(this, Number);
@@ -242,8 +271,8 @@
 
         Render.Number = Number;
 
-        var Binary = function (_Bind3) {
-            babelHelpers.inherits(Binary, _Bind3);
+        var Binary = function (_Bind4) {
+            babelHelpers.inherits(Binary, _Bind4);
 
             function Binary() {
                 babelHelpers.classCallCheck(this, Binary);
@@ -364,7 +393,11 @@
                                 if (!struct.hide) {
                                     switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                                         case 'string':
-                                            pusher = new Render.Text(struct, val);
+                                            if (val.length > 255) {
+                                                pusher = new Render.TextArea(struct, val);
+                                            } else {
+                                                pusher = new Render.Text(struct, val);
+                                            }
                                             break;
                                         case 'number':
                                             pusher = new Render.Number(struct, val);

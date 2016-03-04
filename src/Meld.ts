@@ -111,7 +111,12 @@ export module Meld {
 						if (!struct.hide) {
 							switch (typeof val) {
 								case 'string':
-									pusher = new r.Text(struct, val);
+									if (val.length > 255) {
+										pusher = new r.TextArea(struct, val);
+									} else {
+										pusher = new r.Text(struct, val);
+									}
+
 									break;
 								case 'number':
 									pusher = new r.Number(struct, val);

@@ -116,13 +116,24 @@ describe('Creation', function () {
 			expect(context.getElementsByTagName('input')[0].type).to.equal('checkbox');
 		});
 
+		it('a textarea', function () {
+			new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'blob': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cupiditate dolorem ex fugiat ipsa, iure maxime nihil nobis possimus quas, saepe sed tempora voluptatum. A cumque dignissimos tempora voluptate voluptates. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cupiditate dolorem ex fugiat ipsa, iure maxime nihil nobis possimus quas, saepe sed tempora voluptatum. A cumque dignissimos tempora voluptate voluptates. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cupiditate dolorem ex fugiat ipsa, iure maxime nihil nobis possimus quas, saepe sed tempora voluptatum. A cumque dignissimos tempora voluptate voluptates. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cupiditate dolorem ex fugiat ipsa, iure maxime nihil nobis possimus quas, saepe sed tempora voluptatum. A cumque dignissimos tempora voluptate voluptates. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cupiditate dolorem ex fugiat ipsa, iure maxime nihil nobis possimus quas, saepe sed tempora voluptatum. A cumque dignissimos tempora voluptate voluptates.'
+				}
+			});
+
+			expect(context.getElementsByTagName('textarea')).to.have.length(1);
+		});
+
 		it('is wrapped in a form tag', function () {
 			new Meld.Ui({
 				elm: '#app',
 				binds: mockPayload
 			});
 
-			expect(context.getElementsByTagName('form').length == 1).to.be.true;
+			expect(context.getElementsByTagName('form')).to.have.length(1);
 		});
 
 		it('group binding\'s', function () {

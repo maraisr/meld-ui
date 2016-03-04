@@ -116,6 +116,28 @@ export module Render {
 		}
 	}
 
+	export class TextArea extends Bind {
+		deligate(): HTMLElement {
+			let elm = document.createElement('textarea');
+
+			elm.setAttribute('id', this.hash);
+			elm.setAttribute('name', this.hash);
+
+			elm.setAttribute('placeholder', this.struct.display);
+
+			if (this.struct.inputClass) {
+				elm.className = this.struct.inputClass;
+			}
+
+			elm.innerText = this.value;
+
+			this.elm.appendChild(this.generateLabel());
+			this.elm.appendChild(elm);
+
+			return this.elm;
+		}
+	}
+
 	export class Number extends Bind {
 		deligate(): HTMLElement {
 			let elm = this.generateInput();
