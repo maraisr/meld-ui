@@ -42,6 +42,31 @@ describe('Creation', function () {
 		expect(document.getElementById('app')).to.be.null;
 	});
 
+	it('destory\'s no elemet', function () {
+		expect(function () {
+			var m = new Meld.Ui({
+				elm: '#app1'
+			});
+			m.destory();
+		}).to.throw();
+	});
+
+	it('no bind values', function () {
+		expect(function () {
+			new Meld.Ui({
+				elm: '#app'
+			});
+		}).to.throw();
+	});
+
+	it('no elm', function () {
+		expect(function () {
+			new Meld.Ui({
+				binds: mockPayload
+			});
+		}).to.throw();
+	});
+
 	describe('renders', function () {
 
 		it('3 text inputs', function () {
