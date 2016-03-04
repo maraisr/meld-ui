@@ -246,6 +246,22 @@ describe('Creation', function () {
 			});
 		});
 
+		it('updates the ui', function(done) {
+			var m = new Meld.Ui({
+				elm: '#app',
+				binds: {
+					'firstname': 'Marais'
+				}
+			});
+
+			context.getElementsByTagName('input')[0].value = 'test';
+
+			setTimeout(function(v) {
+				expect(m.binds.firstname).to.equal('test');
+				done();
+			}, 100);
+		});
+
 	});
 
 });

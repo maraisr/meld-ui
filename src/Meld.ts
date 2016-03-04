@@ -10,7 +10,7 @@ export module Meld {
 		public struct: Array<UiStructure> = new Array();
 
 		private fields: Array<any> = new Array();
-		private binds: any;
+		public binds: any;
 
 		private _uid: number;
 		private _isMeld: Boolean;
@@ -95,6 +95,7 @@ export module Meld {
 				switch (typeof val) {
 					case 'object':
 						var struct = this.findStructure('group', key);
+						struct.field = key;
 
 						if (!struct.hide) {
 							var grp = new r.Group(struct);
@@ -107,11 +108,12 @@ export module Meld {
 					case 'string':
 					case 'boolean':
 						var struct = this.findStructure('field', key);
+						struct.field = key;
 
 						if (!struct.hide) {
 							switch (typeof val) {
 								case 'string':
-									if (val.length > 255) {
+									if (val.length > 155) {
 										pusher = new r.TextArea(struct, val);
 									} else {
 										pusher = new r.Text(struct, val);
@@ -149,7 +151,7 @@ export module Meld {
 			}
 
 			let _r = new r.Rndr(Common.hasher());
-			this.elm.appendChild(_r.render(this.build(this.binds)));
+			this.elm.appendChild(_r.render(this.build(this.binds), this.binds));
 
 			return this.elm;
 		}

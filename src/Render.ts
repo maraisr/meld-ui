@@ -5,6 +5,9 @@ export module Render {
 		public name: string;
 
 		private elm: HTMLElement;
+		private fields: Array<any>;
+
+		private orig: any;
 
 		constructor(name: string) {
 			this.name = name;
@@ -13,12 +16,26 @@ export module Render {
 			this.elm.setAttribute('id', name);
 		}
 
-		render(fields: Array<any>): HTMLElement {
-			fields.forEach((v) => {
+		render(fields: Array<any>, orig: any): HTMLElement {
+			this.orig = orig;
+			this.fields = fields;
+			this.fields.forEach((v) => {
 				this.elm.appendChild(v.deligate());
 			});
 
+			requestAnimationFrame(() => this.loop());
+
 			return this.elm;
+		}
+
+		private loop() {
+			this.fields.forEach((v: Bind) => {
+				if (v.struct) {
+					this.orig[v.struct.field] = v.result;
+				}
+			});
+
+			requestAnimationFrame(() => this.loop());
 		}
 	}
 
@@ -65,6 +82,8 @@ export module Render {
 
 		public value: any;
 
+		public innerElm: any;
+
 		constructor(struct: UiStructure, value: any) {
 			this.struct = struct;
 			this.value = value;
@@ -102,6 +121,10 @@ export module Render {
 
 			return elm;
 		}
+
+		get result() {
+			return this.innerElm.value;
+		}
 	}
 
 	export class Text extends Bind {
@@ -111,6 +134,8 @@ export module Render {
 
 			this.elm.appendChild(this.generateLabel());
 			this.elm.appendChild(elm);
+
+			this.innerElm = elm;
 
 			return this.elm;
 		}
@@ -134,6 +159,8 @@ export module Render {
 			this.elm.appendChild(this.generateLabel());
 			this.elm.appendChild(elm);
 
+			this.innerElm = elm;
+
 			return this.elm;
 		}
 	}
@@ -145,6 +172,8 @@ export module Render {
 
 			this.elm.appendChild(this.generateLabel());
 			this.elm.appendChild(elm);
+
+			this.innerElm = elm;
 
 			return this.elm;
 		}
@@ -165,6 +194,8 @@ export module Render {
 			lbl.insertBefore(elm, lbl.firstChild);
 
 			this.elm.appendChild(lbl);
+
+			this.innerElm = elm;
 
 			return this.elm;
 		}

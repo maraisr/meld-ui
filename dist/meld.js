@@ -107,13 +107,32 @@
 
             babelHelpers.createClass(Rndr, [{
                 key: 'render',
-                value: function render(fields) {
+                value: function render(fields, orig) {
                     var _this = this;
 
-                    fields.forEach(function (v) {
+                    this.orig = orig;
+                    this.fields = fields;
+                    this.fields.forEach(function (v) {
                         _this.elm.appendChild(v.deligate());
                     });
+                    requestAnimationFrame(function () {
+                        return _this.loop();
+                    });
                     return this.elm;
+                }
+            }, {
+                key: 'loop',
+                value: function loop() {
+                    var _this2 = this;
+
+                    this.fields.forEach(function (v) {
+                        if (v.struct) {
+                            _this2.orig[v.struct.field] = v.result;
+                        }
+                    });
+                    requestAnimationFrame(function () {
+                        return _this2.loop();
+                    });
                 }
             }]);
             return Rndr;
@@ -145,10 +164,10 @@
             }, {
                 key: 'deligate',
                 value: function deligate() {
-                    var _this2 = this;
+                    var _this3 = this;
 
                     this.fields.forEach(function (v) {
-                        _this2.elm.appendChild(v.deligate());
+                        _this3.elm.appendChild(v.deligate());
                     });
                     return this.elm;
                 }
@@ -192,6 +211,11 @@
                     elm.innerText = this.struct.display;
                     return elm;
                 }
+            }, {
+                key: 'result',
+                get: function get() {
+                    return this.innerElm.value;
+                }
             }]);
             return Bind;
         }();
@@ -211,6 +235,7 @@
                     elm.setAttribute('type', 'text');
                     this.elm.appendChild(this.generateLabel());
                     this.elm.appendChild(elm);
+                    this.innerElm = elm;
                     return this.elm;
                 }
             }]);
@@ -240,6 +265,7 @@
                     elm.innerText = this.value;
                     this.elm.appendChild(this.generateLabel());
                     this.elm.appendChild(elm);
+                    this.innerElm = elm;
                     return this.elm;
                 }
             }]);
@@ -263,6 +289,7 @@
                     elm.setAttribute('type', 'number');
                     this.elm.appendChild(this.generateLabel());
                     this.elm.appendChild(elm);
+                    this.innerElm = elm;
                     return this.elm;
                 }
             }]);
@@ -292,6 +319,7 @@
                     var lbl = this.generateLabel();
                     lbl.insertBefore(elm, lbl.firstChild);
                     this.elm.appendChild(lbl);
+                    this.innerElm = elm;
                     return this.elm;
                 }
             }]);
@@ -380,6 +408,7 @@
                         switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                             case 'object':
                                 var struct = _this2.findStructure('group', key);
+                                struct.field = key;
                                 if (!struct.hide) {
                                     var grp = new Render.Group(struct);
                                     grp.set(_this2.build(val));
@@ -390,10 +419,11 @@
                             case 'string':
                             case 'boolean':
                                 var struct = _this2.findStructure('field', key);
+                                struct.field = key;
                                 if (!struct.hide) {
                                     switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                                         case 'string':
-                                            if (val.length > 255) {
+                                            if (val.length > 155) {
                                                 pusher = new Render.TextArea(struct, val);
                                             } else {
                                                 pusher = new Render.Text(struct, val);
@@ -426,7 +456,7 @@
                         throw new ReferenceError('Meld: Empty bind values, nothing to render');
                     }
                     var _r = new Render.Rndr(Common.hasher());
-                    this.elm.appendChild(_r.render(this.build(this.binds)));
+                    this.elm.appendChild(_r.render(this.build(this.binds), this.binds));
                     return this.elm;
                 }
             }, {
