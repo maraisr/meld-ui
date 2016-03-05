@@ -1,6 +1,5 @@
 import {Render as r} from './Render';
 import {Common, UiStructure, UiStandard} from './helpers/Common';
-import {Config} from './helpers/Config';
 
 let uid = 0;
 
