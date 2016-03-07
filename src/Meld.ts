@@ -1,12 +1,14 @@
 import {Render as r} from './Render';
-import {Common, UiStructure, UiStandard} from './helpers/Common';
+import {Common, UiStandard} from './helpers/Common';
+
+import {Structure, UiStructure} from './helpers/Structure';
 
 let uid = 0;
 
 export module Meld {
     export class Ui {
 		public elm: HTMLElement;
-		public struct: Array<UiStructure> = new Array();
+		public struct: Structure;
 
 		private fields: Array<any> = new Array();
 		public binds: any;
@@ -15,9 +17,8 @@ export module Meld {
 		private _isMeld: Boolean;
 
         constructor(config: UiStandard) {
-
 			this.binds = config.binds;
-			this.struct = config.structure || [];
+			this.struct = new Structure(config.structure || []);
 
 			this._uid = uid++;
 			this._isMeld = true;
@@ -28,56 +29,6 @@ export module Meld {
 
 			return this;
         }
-
-		private findStructure(which: string, search: string): UiStructure {
-			let structure = this.struct.filter((v: UiStructure) => {
-				return v[which] == search;
-			}),
-				sendStruct: UiStructure,
-				found: Boolean = false;
-
-			if (structure.length == 1) {
-				found = true;
-				sendStruct = {
-					display: structure[0].display || Common.titleCase(search),
-					class: structure[0].class || void 0,
-					hide: structure[0].hide || false
-				}
-			} else {
-				sendStruct = {
-					display: Common.titleCase(search)
-				}
-			}
-
-			switch (which) {
-				case 'group':
-				case 'field':
-					var tmp = this.struct.filter((v: UiStructure) => {
-						return v[which] == '*';
-					});
-
-					if (tmp.length > 0) {
-						if (sendStruct.class == void 0) {
-							sendStruct.class = tmp[0].class || void 0;
-						}
-					}
-					break;
-			}
-
-			sendStruct.inputClass = ((): string => {
-				var tmp = this.struct.filter((v: UiStructure) => {
-					return v.input == '*';
-				});
-
-				if (tmp.length > 0) {
-					return tmp[0].class || void 0;
-				}
-
-				return void 0;
-			})();
-
-			return sendStruct;
-		}
 
 		// TODO: Move all DOM augments to an engine of somesort, so that we canship to virtual DOM down the tack
 		private build(binds: any): Array<any> {
@@ -93,7 +44,7 @@ export module Meld {
 
 				switch (typeof val) {
 					case 'object':
-						var struct = this.findStructure('group', key);
+						var struct = this.struct.findStructure('group', key);
 						struct.field = key;
 
 						if (!struct.hide) {
@@ -106,7 +57,7 @@ export module Meld {
 					case 'number':
 					case 'string':
 					case 'boolean':
-						var struct = this.findStructure('field', key);
+						var struct = this.struct.findStructure('field', key);
 						struct.field = key;
 
 						if (!struct.hide) {

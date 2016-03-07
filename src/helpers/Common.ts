@@ -1,3 +1,5 @@
+import {UiStructure} from 'Structure';
+
 export class Common {
 	public static hasher(len: number = 7): string {
 		return Math.random().toString(36).substr(2, len)
@@ -8,16 +10,6 @@ export class Common {
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
 	}
-}
-
-export interface UiStructure {
-	field?: string;
-	group?: string;
-	input?: string;
-	display?: string;
-	class?: string;
-	inputClass?: string;
-	hide?: Boolean;
 }
 
 export interface UiStandard {

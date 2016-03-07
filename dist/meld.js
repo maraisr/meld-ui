@@ -329,6 +329,64 @@
         Render.Binary = Binary;
     })(Render || (Render = {}));
 
+    var Structure = function () {
+        function Structure(config) {
+            babelHelpers.classCallCheck(this, Structure);
+
+            this.struct = new Array();
+            this.struct = config;
+        }
+
+        babelHelpers.createClass(Structure, [{
+            key: 'findStructure',
+            value: function findStructure(which, search) {
+                var _this = this;
+
+                var structure = this.struct.filter(function (v) {
+                    return v[which] == search;
+                }),
+                    sendStruct = undefined,
+                    found = false;
+                if (structure.length == 1) {
+                    found = true;
+                    sendStruct = {
+                        display: structure[0].display || Common.titleCase(search),
+                        class: structure[0].class || void 0,
+                        hide: structure[0].hide || false
+                    };
+                } else {
+                    sendStruct = {
+                        display: Common.titleCase(search)
+                    };
+                }
+                switch (which) {
+                    case 'group':
+                    case 'field':
+                        var tmp = this.struct.filter(function (v) {
+                            return v[which] == '*';
+                        });
+                        if (tmp.length > 0) {
+                            if (sendStruct.class == void 0) {
+                                sendStruct.class = tmp[0].class || void 0;
+                            }
+                        }
+                        break;
+                }
+                sendStruct.inputClass = function () {
+                    var tmp = _this.struct.filter(function (v) {
+                        return v.input == '*';
+                    });
+                    if (tmp.length > 0) {
+                        return tmp[0].class || void 0;
+                    }
+                    return void 0;
+                }();
+                return sendStruct;
+            }
+        }]);
+        return Structure;
+    }();
+
     var uid = 0;
     exports.Meld;
     (function (Meld) {
@@ -336,10 +394,9 @@
             function Ui(config) {
                 babelHelpers.classCallCheck(this, Ui);
 
-                this.struct = new Array();
                 this.fields = new Array();
                 this.binds = config.binds;
-                this.struct = config.structure || [];
+                this.struct = new Structure(config.structure || []);
                 this._uid = uid++;
                 this._isMeld = true;
                 this.elm = document.body.querySelector(config.elm);
@@ -348,55 +405,9 @@
             }
 
             babelHelpers.createClass(Ui, [{
-                key: 'findStructure',
-                value: function findStructure(which, search) {
-                    var _this = this;
-
-                    var structure = this.struct.filter(function (v) {
-                        return v[which] == search;
-                    }),
-                        sendStruct = undefined,
-                        found = false;
-                    if (structure.length == 1) {
-                        found = true;
-                        sendStruct = {
-                            display: structure[0].display || Common.titleCase(search),
-                            class: structure[0].class || void 0,
-                            hide: structure[0].hide || false
-                        };
-                    } else {
-                        sendStruct = {
-                            display: Common.titleCase(search)
-                        };
-                    }
-                    switch (which) {
-                        case 'group':
-                        case 'field':
-                            var tmp = this.struct.filter(function (v) {
-                                return v[which] == '*';
-                            });
-                            if (tmp.length > 0) {
-                                if (sendStruct.class == void 0) {
-                                    sendStruct.class = tmp[0].class || void 0;
-                                }
-                            }
-                            break;
-                    }
-                    sendStruct.inputClass = function () {
-                        var tmp = _this.struct.filter(function (v) {
-                            return v.input == '*';
-                        });
-                        if (tmp.length > 0) {
-                            return tmp[0].class || void 0;
-                        }
-                        return void 0;
-                    }();
-                    return sendStruct;
-                }
-            }, {
                 key: 'build',
                 value: function build(binds) {
-                    var _this2 = this;
+                    var _this = this;
 
                     var returns = [];
                     Object.keys(binds).forEach(function (key) {
@@ -407,18 +418,18 @@
                         }
                         switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
                             case 'object':
-                                var struct = _this2.findStructure('group', key);
+                                var struct = _this.struct.findStructure('group', key);
                                 struct.field = key;
                                 if (!struct.hide) {
                                     var grp = new Render.Group(struct);
-                                    grp.set(_this2.build(val));
+                                    grp.set(_this.build(val));
                                     pusher = grp;
                                 }
                                 break;
                             case 'number':
                             case 'string':
                             case 'boolean':
-                                var struct = _this2.findStructure('field', key);
+                                var struct = _this.struct.findStructure('field', key);
                                 struct.field = key;
                                 if (!struct.hide) {
                                     switch (typeof val === 'undefined' ? 'undefined' : babelHelpers.typeof(val)) {
