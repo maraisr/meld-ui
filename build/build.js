@@ -9,7 +9,6 @@ var fs = require('fs'),
 
 var banner = '/** ' + pkg.name + ' - ' + pkg.description + '\n' +
 	' *\n' +
-	' * @version v' + pkg.version + '\n' +
 	' * @author ' + pkg.author + '\n' +
 	' * @link ' + pkg.homepage + '\n' +
 	' * @license ' + pkg.license + '\n' +
