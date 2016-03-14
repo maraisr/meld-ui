@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Meld-ui by maraisr</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Meld-ui</h1>
+        <h2>A lightweight library in which I aim to create an OIM for JavaScript done the &quot;real world&quot; way.</h2>
+        <a href="https://github.com/maraisr/meld-ui" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="meld-ui" class="anchor" href="#meld-ui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MELD UI</h1>
+
+<p><a href="https://www.npmjs.com/package/meld-ui"><img src="https://img.shields.io/npm/v/meld-ui.svg?style=flat-square" alt="NPM version"></a>
+<a href="https://github.com/maraisr/meld-ui"><img src="https://img.shields.io/bower/v/meld-ui.svg?style=flat-square" alt="Bower version"></a>
+<a href="https://travis-ci.org/maraisr/meld-ui"><img src="https://img.shields.io/travis/maraisr/meld-ui.svg?style=flat-square" alt="Travis"></a>
+<a href="https://codecov.io/github/maraisr/meld-ui"><img src="https://img.shields.io/codecov/c/github/maraisr/meld-ui.svg?style=flat-square" alt="Codecov"></a>
+<a href="https://github.com/maraisr/meld-ui/blob/master/LICENSE.md"><img src="https://img.shields.io/npm/l/meld-ui.svg?style=flat-square" alt="License"></a></p>
+
+<h2>
+<a id="intro" class="anchor" href="#intro" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Intro</h2>
+
+<p>Meld Ui is a small lightweight library per say, aiding in a flexable unobtrusive take on JavaScript plain objects that renders a form, with a simple API. If you're familiar with OIM's... this is one.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Install Meld UI using <a href="https://docs.npmjs.com/">npm</a>:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm i meld-ui --save</pre></div>
+
+<p>Install Meld UI using <a href="http://bower.io/#getting-started">bower</a>:</p>
+
+<div class="highlight highlight-source-shell"><pre>bower i meld-ui --save</pre></div>
+
+<h2>
+<a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Usage</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">new</span> <span class="pl-en">Meld.Ui</span>({
+    elm<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>#app<span class="pl-pds">'</span></span>,
+    binds<span class="pl-k">:</span> {
+        name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Leanne Graham<span class="pl-pds">'</span></span>,
+        details<span class="pl-k">:</span> {
+            email<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Sincere@april.biz<span class="pl-pds">'</span></span>,
+            website<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>hildegard.org<span class="pl-pds">'</span></span>,
+        },
+        address<span class="pl-k">:</span> {
+            street<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Kulas Light<span class="pl-pds">'</span></span>,
+            suite<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Apt. 556<span class="pl-pds">'</span></span>,
+            city<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Gwenborough<span class="pl-pds">'</span></span>,
+            zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>92998-3874<span class="pl-pds">'</span></span>
+        }
+    }
+})</pre></div>
+
+<h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building</h2>
+
+<ul>
+<li><code>npm i -g typescript</code></li>
+<li><code>npm i</code></li>
+<li><code>npm run watch:dev</code></li>
+</ul>
+
+<h2>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h2>
+
+<ul>
+<li><code>npm i</code></li>
+<li><code>npm test</code></li>
+</ul>
+
+<p>For a release <code>npm run build</code>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="https://github.com/maraisr/meld-ui/blob/master/LICENSE.md">GPL-2.0</a></p>
+
+<p>Copyright(c) 2016 Marais Rossouw</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/maraisr/meld-ui/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/maraisr/meld-ui/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/maraisr/meld-ui"></a> is maintained by <a href="https://github.com/maraisr">maraisr</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
